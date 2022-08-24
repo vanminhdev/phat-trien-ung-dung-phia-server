@@ -27,7 +27,7 @@ namespace WebAPI.Services
             });
         }
 
-        public List<Student> GetAllStudent(StudentFilterDto input)
+        public PageResultStudentDto GetAllStudent(StudentFilterDto input)
         {
             //kiểm tra Name có chứa keyword không
             var students = _students;
@@ -40,13 +40,19 @@ namespace WebAPI.Services
                     .ToList();
             }
 
+            int totalItem = students.Count;
+
             //chia trang
             students = students
                 .Skip(input.PageSize * (input.PageIndex - 1))
                 .Take(input.PageSize)
                 .ToList();
 
-            return students;
+            return new PageResultStudentDto
+            {
+                Items = students,
+                TotalItem = totalItem
+            };
         }
 
         //sửa
