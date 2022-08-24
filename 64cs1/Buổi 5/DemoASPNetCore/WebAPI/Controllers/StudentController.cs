@@ -18,9 +18,10 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("get-all")]
-        public IActionResult GetAll()
+        //public IActionResult GetAll(int pageSize, int pageIndex, string keyword)
+        public IActionResult GetAll([FromQuery] StudentFilterDto input)
         {
-            return Ok(_studentService.GetAllStudent());
+            return Ok(_studentService.GetAllStudent(input));
         }
 
         [HttpGet("get-by-id")]
@@ -31,7 +32,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateStudent(CreateStudentDto input)
+        //public IActionResult CreateStudent(CreateStudentDto input)
+        //public IActionResult CreateStudent([FromBody] CreateStudentDto input) //giống nhau
+        public IActionResult CreateStudent([FromForm] CreateStudentDto input) //dùng trong trường hợp lấy file.
         {
             try
             {
@@ -40,7 +43,10 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionBody 
+                { 
+                    Message = ex.Message
+                });
             }
         }
     }

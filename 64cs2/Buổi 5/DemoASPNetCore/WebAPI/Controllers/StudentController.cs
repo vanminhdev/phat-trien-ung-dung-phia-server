@@ -17,13 +17,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get-all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromQuery] StudentFilterDto input)
         {
             return Ok(_studentService.GetAll());
         }
 
         [HttpPost("create")]
-        public IActionResult CreateStudent([FromBody] CreateStudentDto input)
+        public IActionResult CreateStudent([FromForm] CreateStudentDto input)
         {
             try
             {

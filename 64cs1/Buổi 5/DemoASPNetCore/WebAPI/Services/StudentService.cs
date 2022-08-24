@@ -18,6 +18,8 @@ namespace WebAPI.Services
         //thêm
         public void CreateStudent(CreateStudentDto input)
         {
+            throw new Exception("lỗi");
+
             _students.Add(new Student
             {
                 Id = ++StudentService.Id,
@@ -25,9 +27,26 @@ namespace WebAPI.Services
             });
         }
 
-        public List<Student> GetAllStudent()
+        public List<Student> GetAllStudent(StudentFilterDto input)
         {
-            return _students;
+            //kiểm tra Name có chứa keyword không
+            var students = _students;
+
+            if (input.Keyword != null) //nếu keyword khác null
+            {
+                students = _students
+                    //kiểm tra nếu Name khác null, nếu Name có chứa ký tự trong keyword
+                    .Where(s => s.Name != null && s.Name.Contains(input.Keyword))
+                    .ToList();
+            }
+
+            //chia trang
+            students = students
+                .Skip(input.PageSize * (input.PageIndex - 1))
+                .Take(input.PageSize)
+                .ToList();
+
+            return students;
         }
 
         //sửa
