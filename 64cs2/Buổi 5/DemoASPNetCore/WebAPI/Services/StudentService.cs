@@ -38,7 +38,7 @@ namespace WebAPI.Services
 
         public void Create(CreateStudentDto input)
         {
-            if (_students.FirstOrDefault(s => s.StudentCode == input.StudentCode) != null)
+            if (_students.Any(s => s.StudentCode == input.StudentCode))
             {
                 throw new Exception($"Mã sinh viên \"{input.StudentCode}\" đã tồn tại");
             }
