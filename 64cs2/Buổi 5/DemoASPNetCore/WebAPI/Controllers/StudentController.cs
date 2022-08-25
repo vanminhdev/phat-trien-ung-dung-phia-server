@@ -7,7 +7,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class StudentController : ApiControllerBase
     {
         private readonly IStudentService _studentService;
 
@@ -17,9 +17,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get-all")]
-        public IActionResult GetAll([FromQuery] StudentFilterDto input)
+        //public IActionResult GetAll(int pageSize, int pageIndex, string keyword)
+        public IActionResult GetAll([FromQuery] StudentFilterDto input) //giống.
         {
-            return Ok(_studentService.GetAll());
+            return Ok(_studentService.GetAll(input));
         }
 
         [HttpPost("create")]
@@ -32,7 +33,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return ReturnException(ex);
             }
         }
 

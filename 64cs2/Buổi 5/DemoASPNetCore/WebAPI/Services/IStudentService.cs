@@ -6,6 +6,6 @@ namespace WebAPI.Services
     public interface IStudentService
     {
         void Create(CreateStudentDto input);
-        List<Student> GetAll();
+        PageResultDto<List<Student>> GetAll(StudentFilterDto input);
     }
 }

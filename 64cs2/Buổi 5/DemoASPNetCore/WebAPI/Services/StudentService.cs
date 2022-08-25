@@ -12,13 +12,37 @@ namespace WebAPI.Services
         {
         }
 
-        public List<Student> GetAll() 
+        public PageResultDto<List<Student>> GetAll(StudentFilterDto input) 
         {
-            return _students;
+            var students = _students;
+
+            if (input.Keyword != null)
+            {
+                //tìm những phần tử thoả mãn điều kiện
+                students = students.Where(s => s.Name != null 
+                    && s.Name.ToLower().Contains(input.Keyword?.ToLower()))
+                    .ToList();
+            }
+            int totalItem = students.Count();
+
+            students = students.Skip(input.PageSize * (input.PageIndex - 1))
+                .Take(input.PageSize)
+                .ToList();
+
+            return new PageResultDto<List<Student>>
+            {
+                Items = students,
+                TotalItem = totalItem
+            };
         }
 
         public void Create(CreateStudentDto input)
         {
+            if (_students.FirstOrDefault(s => s.StudentCode == input.StudentCode) != null)
+            {
+                throw new Exception($"Mã sinh viên \"{input.StudentCode}\" đã tồn tại");
+            }
+
             _students.Add(new Student
             {
                 Id = ++_id,

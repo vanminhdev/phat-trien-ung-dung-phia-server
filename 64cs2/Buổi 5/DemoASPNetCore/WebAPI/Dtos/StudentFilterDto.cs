@@ -11,7 +11,12 @@ namespace WebAPI.Dtos
         [FromQuery(Name = "pageIndex")]
         public int PageIndex { get; set; }
 
-        [FromQuery(Name = "keyWord")]
-        public string KeyWord { get; set; }
+        private string _keyword;
+        [FromQuery(Name = "keyword")]
+        public string Keyword 
+        { 
+            get => _keyword; 
+            set => _keyword = value?.Trim(); 
+        }
     }
 }
