@@ -1,4 +1,5 @@
-﻿using WebAPI.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using WebAPI.Dtos;
 using WebAPI.Entities;
 
 namespace WebAPI.Services
@@ -7,9 +8,14 @@ namespace WebAPI.Services
     {
         private static int _id = 0;
         private static List<Student> _students = new();
+        private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;
 
-        public StudentService()
+        public StudentService(ILogger<StudentService> logger,
+            IConfiguration configuration)
         {
+            _logger = logger;
+            _configuration = configuration;
         }
 
         public PageResultDto<List<Student>> GetAll(StudentFilterDto input) 
@@ -43,12 +49,25 @@ namespace WebAPI.Services
                 throw new Exception($"Mã sinh viên \"{input.StudentCode}\" đã tồn tại");
             }
 
+            string directory = _configuration["App_Data"];
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            var filePath = Path.GetTempFileName();
+            using (var stream = System.IO.File.Create(Path.Combine(directory, input.Avatar.FileName)))
+            {
+                input.Avatar.CopyTo(stream);
+            }
+
             _students.Add(new Student
             {
                 Id = ++_id,
                 Name = input.Name,
                 StudentCode = input.StudentCode,
-                DateOfBirth = input.DateOfBirth
+                DateOfBirth = input.DateOfBirth,
+                Avatar = filePath 
             });
         }
 
