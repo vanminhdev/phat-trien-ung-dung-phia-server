@@ -55,8 +55,7 @@ namespace WebAPI.Services
                 Directory.CreateDirectory(directory);
             }
 
-            var filePath = Path.GetTempFileName();
-            using (var stream = System.IO.File.Create(Path.Combine(directory, input.Avatar.FileName)))
+            using (var stream = File.Create(Path.Combine(directory, input.Avatar.FileName)))
             {
                 input.Avatar.CopyTo(stream);
             }
@@ -67,7 +66,7 @@ namespace WebAPI.Services
                 Name = input.Name,
                 StudentCode = input.StudentCode,
                 DateOfBirth = input.DateOfBirth,
-                Avatar = filePath 
+                Avatar = input.Avatar.FileName
             });
         }
 

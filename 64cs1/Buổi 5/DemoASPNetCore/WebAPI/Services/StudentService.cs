@@ -1,12 +1,11 @@
-﻿using WebAPI.Dto;
+﻿using WebAPI.DbContexts;
+using WebAPI.Dto;
 using WebAPI.Entities;
 
 namespace WebAPI.Services
 {
     public class StudentService : IStudentService
     {
-        private static int Id = 0;
-        private static List<Student> _students = new();
         private readonly ILogger _logger;
 
         public StudentService(ILogger<StudentService> logger)
@@ -18,11 +17,9 @@ namespace WebAPI.Services
         //thêm
         public void CreateStudent(CreateStudentDto input)
         {
-            throw new Exception("lỗi");
-
-            _students.Add(new Student
+            ApplicationDbContext.Students.Add(new Student
             {
-                Id = ++StudentService.Id,
+                Id = ++ApplicationDbContext.StudentId,
                 
             });
         }
@@ -30,11 +27,11 @@ namespace WebAPI.Services
         public PageResultStudentDto GetAllStudent(StudentFilterDto input)
         {
             //kiểm tra Name có chứa keyword không
-            var students = _students;
+            var students = ApplicationDbContext.Students;
 
             if (input.Keyword != null) //nếu keyword khác null
             {
-                students = _students
+                students = ApplicationDbContext.Students
                     //kiểm tra nếu Name khác null, nếu Name có chứa ký tự trong keyword
                     .Where(s => s.Name != null && s.Name.Contains(input.Keyword))
                     .ToList();
