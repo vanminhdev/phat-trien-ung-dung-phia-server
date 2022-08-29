@@ -33,8 +33,8 @@ namespace WebAPI.Controllers
 
         [HttpPost]
         //public IActionResult CreateStudent(CreateStudentDto input)
-        //public IActionResult CreateStudent([FromBody] CreateStudentDto input) //giống nhau
-        public IActionResult CreateStudent([FromForm] CreateStudentDto input) //dùng trong trường hợp lấy file.
+        public IActionResult CreateStudent([FromBody] CreateStudentDto input) //giống nhau
+        //public IActionResult CreateStudent([FromForm] CreateStudentDto input) //dùng trong trường hợp lấy file.
         {
             try
             {

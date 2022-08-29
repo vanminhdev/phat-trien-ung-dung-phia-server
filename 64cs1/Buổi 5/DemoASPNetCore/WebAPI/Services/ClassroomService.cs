@@ -1,9 +1,10 @@
 ﻿using WebAPI.DbContexts;
+using WebAPI.Dto;
 using WebAPI.Entities;
 
 namespace WebAPI.Services
 {
-    public class ClassroomService
+    public class ClassroomService : IClassroomService
     {
         private readonly ILogger _logger;
 
@@ -48,6 +49,15 @@ namespace WebAPI.Services
             });
         }
 
+        public void AddListStudent(AddListStudentDto input)
+        {
+            //xử lý thêm danh sách sinh viên
+            foreach (var studentId in input.StudentIds)
+            {
+
+            }
+        }
+
         /// <summary>
         /// Danh sách sinh viên trong lớp.
         /// </summary>
@@ -59,6 +69,25 @@ namespace WebAPI.Services
                 .Where(sc => sc.ClassroomId == classroomId).Select(sc => sc.StudentId).ToList();
 
             var students = ApplicationDbContext.Students.Where(s => studentIds.Contains(s.Id)).ToList();
+
+            //sử dụng join cách 1 dùng method
+            var join1 = ApplicationDbContext.StudentClassrooms.Where(sc => sc.ClassroomId == classroomId)
+                .Join(ApplicationDbContext.Students, sc => sc.StudentId, s => s.Id,
+                (studentClassroom, student) => new { student });
+
+            var result1 = join1.Select(o => o.student).ToList();
+
+            //sử dụng join cách 2 dùng syntax
+            var join2 = from studentClassroom in ApplicationDbContext.StudentClassrooms
+                       join student in ApplicationDbContext.Students on studentClassroom.StudentId equals student.Id
+                       where studentClassroom.ClassroomId == classroomId
+                       select new
+                       {
+                           student
+                       };
+
+            var result2 = join2.Select(o => o.student).ToList();
+            //result1 và result2 cùng cho ra 1 kết quả.
 
             return students;
         }

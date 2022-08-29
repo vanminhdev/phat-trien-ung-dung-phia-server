@@ -19,6 +19,8 @@ namespace WebAPI
             //builder.Services.AddTransient<IStudentService, StudentService>();
             //builder.Services.AddSingleton<IStudentService, StudentService>();
 
+            builder.Services.AddScoped<IClassroomService, ClassroomService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
