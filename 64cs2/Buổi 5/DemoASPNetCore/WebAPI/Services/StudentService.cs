@@ -55,10 +55,10 @@ namespace WebAPI.Services
                 Directory.CreateDirectory(directory);
             }
 
-            using (var stream = File.Create(Path.Combine(directory, input.Avatar.FileName)))
-            {
-                input.Avatar.CopyTo(stream);
-            }
+            //using (var stream = File.Create(Path.Combine(directory, input.Avatar.FileName)))
+            //{
+            //    input.Avatar.CopyTo(stream);
+            //}
 
             _students.Add(new Student
             {
@@ -66,7 +66,7 @@ namespace WebAPI.Services
                 Name = input.Name,
                 StudentCode = input.StudentCode,
                 DateOfBirth = input.DateOfBirth,
-                Avatar = input.Avatar.FileName
+                //Avatar = input.Avatar.FileName
             });
         }
 

@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult CreateStudent([FromForm] CreateStudentDto input)
+        public IActionResult CreateStudent([FromBody] CreateStudentDto input)
         {
             try
             {
