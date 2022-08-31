@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Dto;
+using WebAPI.Filters;
 using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
+    [SampleExceptionFilter]
+    [LogActionFilter]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -36,18 +40,20 @@ namespace WebAPI.Controllers
         public IActionResult CreateStudent([FromBody] CreateStudentDto input) //giống nhau
         //public IActionResult CreateStudent([FromForm] CreateStudentDto input) //dùng trong trường hợp lấy file.
         {
-            try
-            {
-                _studentService.CreateStudent(input);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionBody 
-                { 
-                    Message = ex.Message
-                });
-            }
+
+            _studentService.CreateStudent(input);
+            return Ok();
+            //try
+            //{
+                
+            //}
+            //catch (Exception ex)
+            //{
+            //    return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionBody 
+            //    { 
+            //        Message = ex.Message
+            //    });
+            //}
         }
     }
 }

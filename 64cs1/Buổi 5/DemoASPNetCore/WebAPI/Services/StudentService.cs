@@ -17,6 +17,8 @@ namespace WebAPI.Services
         //thêm
         public void CreateStudent(CreateStudentDto input)
         {
+            throw new Exception("lỗi thêm sinh viên");
+
             ApplicationDbContext.Students.Add(new Student
             {
                 Id = ++ApplicationDbContext.StudentId,
