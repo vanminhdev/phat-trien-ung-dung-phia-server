@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebAPI.Filters
 {
-    public class LogActionFilter : ActionFilterAttribute
+    public class LogActionFilter : Attribute, IActionFilter
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var logger = filterContext.HttpContext.RequestServices.GetService(typeof(ILogger<LogActionFilter>)) as ILogger<LogActionFilter>;
             
@@ -22,18 +22,22 @@ namespace WebAPI.Filters
 
             Log("OnActionExecuting", filterContext.RouteData);
         }
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+
+        public void OnActionExecuted(ActionExecutedContext filterContext)
         {
             Log("OnActionExecuted", filterContext.RouteData);
         }
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
+
+        public void OnResultExecuting(ResultExecutingContext filterContext)
         {
             Log("OnResultExecuting", filterContext.RouteData);
         }
-        public override void OnResultExecuted(ResultExecutedContext filterContext)
+
+        public void OnResultExecuted(ResultExecutedContext filterContext)
         {
             Log("OnResultExecuted", filterContext.RouteData);
         }
+
         private void Log(string methodName, RouteData routeData)
         {
             var controllerName = routeData.Values["controller"]; 
