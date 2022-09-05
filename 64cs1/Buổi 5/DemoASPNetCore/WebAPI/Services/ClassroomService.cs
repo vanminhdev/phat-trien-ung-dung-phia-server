@@ -77,7 +77,7 @@ namespace WebAPI.Services
 
             var result1 = join1.Select(o => o.student).ToList();
 
-            //sử dụng join cách 2 dùng syntax
+            //sử dụng join cách 2 dùng keyword
             var join2 = from studentClassroom in ApplicationDbContext.StudentClassrooms
                        join student in ApplicationDbContext.Students on studentClassroom.StudentId equals student.Id
                        where studentClassroom.ClassroomId == classroomId
@@ -86,7 +86,19 @@ namespace WebAPI.Services
                            student
                        };
 
-            var result2 = join2.Select(o => o.student).ToList();
+            var test = (from s in join2
+                        select new Student
+                        {
+                            Id = s.student.Id,
+                            
+                        }).ToList();
+
+            var result2 = join2.Select(o => new Student 
+            { 
+               Id = o.student.Id,
+               Name = o.student.Name,
+               Avatar = o.student.Avatar
+            }).ToList();
             //result1 và result2 cùng cho ra 1 kết quả.
 
             return students;

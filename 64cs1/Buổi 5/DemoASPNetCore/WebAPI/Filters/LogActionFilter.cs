@@ -8,23 +8,24 @@ namespace WebAPI.Filters
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var logger = filterContext.HttpContext.RequestServices.GetService(typeof(ILogger<LogActionFilter>)) as ILogger<LogActionFilter>;
-            
-            var query = filterContext.HttpContext.Request.Query;
+            logger.LogInformation("vào đây");
 
-            var idValue = query.FirstOrDefault(q => q.Key == "id");
-            string idStr = idValue.Value.FirstOrDefault();
-            if (idStr != null)
-            {
-                int id = int.Parse(idStr);
-                //xử lý ở đây
-                //filterContext.Result = new BadRequestObjectResult(new { message = "" });
-            }
+            var query = filterContext.HttpContext.Request.Query;
+            //var idValue = query.FirstOrDefault(q => q.Key == "id");
+            //string idStr = idValue.Value.FirstOrDefault();
+            //if (idStr != null)
+            //{
+            //    int id = int.Parse(idStr);
+            //    //xử lý ở đây
+            //    //filterContext.Result = new BadRequestObjectResult(new { message = "" });
+            //}
 
             Log("OnActionExecuting", filterContext.RouteData);
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
+            //filterContext.Result = new OkObjectResult(new {});
             Log("OnActionExecuted", filterContext.RouteData);
         }
 
