@@ -22,28 +22,28 @@ namespace WebAPI.Services
         public void AddStudent(int classroomId, int studentId)
         {
             //kiểm tra sinh viên đã có trong lớp
-            if (ApplicationDbContext.StudentClassrooms
+            if (ApplicationDbContext1.StudentClassrooms
                 .Any(sc => sc.StudentId == studentId && sc.ClassroomId == classroomId))
             {
                 throw new Exception("sinh viên đã tồn tại");
             }
 
-            var classroom = ApplicationDbContext.Classrooms.FirstOrDefault(c => c.Id == classroomId);
+            var classroom = ApplicationDbContext1.Classrooms.FirstOrDefault(c => c.Id == classroomId);
             if (classroom == null)
             {
                 throw new Exception("Không tìm thấy lớp học");
             }
 
-            int soLuongSinhVien = ApplicationDbContext.StudentClassrooms.Where(s => s.ClassroomId == classroomId).Count();
+            int soLuongSinhVien = ApplicationDbContext1.StudentClassrooms.Where(s => s.ClassroomId == classroomId).Count();
 
             if (classroom.MaxStudent == soLuongSinhVien)
             {
                 throw new Exception("Lớp học đã đủ số lượng");
             }
 
-            ApplicationDbContext.StudentClassrooms.Add(new Entities.StudentClassroom
+            ApplicationDbContext1.StudentClassrooms.Add(new Entities.StudentClassroom
             {
-                Id = ++ApplicationDbContext.StudentClassroomId,
+                Id = ++ApplicationDbContext1.StudentClassroomId,
                 ClassroomId = classroomId,
                 StudentId = studentId
             });
@@ -65,21 +65,21 @@ namespace WebAPI.Services
         /// <returns></returns>
         public List<Student> GetStudentByClassroom(int classroomId)
         {
-            var studentIds = ApplicationDbContext.StudentClassrooms
+            var studentIds = ApplicationDbContext1.StudentClassrooms
                 .Where(sc => sc.ClassroomId == classroomId).Select(sc => sc.StudentId).ToList();
 
-            var students = ApplicationDbContext.Students.Where(s => studentIds.Contains(s.Id)).ToList();
+            var students = ApplicationDbContext1.Students.Where(s => studentIds.Contains(s.Id)).ToList();
 
             //sử dụng join cách 1 dùng method
-            var join1 = ApplicationDbContext.StudentClassrooms.Where(sc => sc.ClassroomId == classroomId)
-                .Join(ApplicationDbContext.Students, sc => sc.StudentId, s => s.Id,
+            var join1 = ApplicationDbContext1.StudentClassrooms.Where(sc => sc.ClassroomId == classroomId)
+                .Join(ApplicationDbContext1.Students, sc => sc.StudentId, s => s.Id,
                 (studentClassroom, student) => new { student });
 
             var result1 = join1.Select(o => o.student).ToList();
 
             //sử dụng join cách 2 dùng keyword
-            var join2 = from studentClassroom in ApplicationDbContext.StudentClassrooms
-                       join student in ApplicationDbContext.Students on studentClassroom.StudentId equals student.Id
+            var join2 = from studentClassroom in ApplicationDbContext1.StudentClassrooms
+                       join student in ApplicationDbContext1.Students on studentClassroom.StudentId equals student.Id
                        where studentClassroom.ClassroomId == classroomId
                        select new
                        {

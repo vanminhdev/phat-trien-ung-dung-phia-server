@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using WebAPI.DbContexts;
 using WebAPI.Services;
 
 namespace WebAPI
@@ -14,6 +16,11 @@ namespace WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<StudentDbContext>(options => 
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+            });
 
             builder.Services.AddScoped<IStudentService, StudentService>();
             //builder.Services.AddTransient<IStudentService, StudentService>();

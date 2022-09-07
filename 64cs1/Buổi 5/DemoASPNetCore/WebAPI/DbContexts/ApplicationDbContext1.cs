@@ -2,7 +2,7 @@
 
 namespace WebAPI.DbContexts
 {
-    public class ApplicationDbContext
+    public class ApplicationDbContext1
     {
         //student
         public static int StudentId = 0;

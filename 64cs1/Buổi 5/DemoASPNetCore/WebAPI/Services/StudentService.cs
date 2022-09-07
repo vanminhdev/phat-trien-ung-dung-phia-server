@@ -7,33 +7,38 @@ namespace WebAPI.Services
     public class StudentService : IStudentService
     {
         private readonly ILogger _logger;
+        private readonly StudentDbContext _studentDbContext;
 
-        public StudentService(ILogger<StudentService> logger)
+        public StudentService(
+            ILogger<StudentService> logger,
+            StudentDbContext studentDbContext)
         {
             _logger = logger;
             _logger.LogInformation("vào đây");
+            _studentDbContext = studentDbContext;
         }
 
         //thêm
         public void CreateStudent(CreateStudentDto input)
         {
-            throw new Exception("lỗi thêm sinh viên");
-
-            ApplicationDbContext.Students.Add(new Student
+            _studentDbContext.Students.Add(new Student
             {
-                Id = ++ApplicationDbContext.StudentId,
-                
+                Name = input.Name,
+                DateOfBirth = input.DateOfBirth,
+                Avatar = ""
             });
+
+            _studentDbContext.SaveChanges();
         }
 
         public PageResultStudentDto GetAllStudent(StudentFilterDto input)
         {
             //kiểm tra Name có chứa keyword không
-            var students = ApplicationDbContext.Students;
+            var students = ApplicationDbContext1.Students;
 
             if (input.Keyword != null) //nếu keyword khác null
             {
-                students = ApplicationDbContext.Students
+                students = ApplicationDbContext1.Students
                     //kiểm tra nếu Name khác null, nếu Name có chứa ký tự trong keyword
                     .Where(s => s.Name != null && s.Name.Contains(input.Keyword))
                     .ToList();
