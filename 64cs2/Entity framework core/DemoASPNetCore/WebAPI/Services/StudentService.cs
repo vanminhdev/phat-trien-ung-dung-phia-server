@@ -16,7 +16,7 @@ namespace WebAPI.Services
         {
             _logger = logger;
             _configuration = configuration;
-            _dbContext=dbContext;
+            _dbContext = dbContext;
         }
 
         public PageResultDto<List<Student>> GetAll(StudentFilterDto input) 
@@ -31,7 +31,8 @@ namespace WebAPI.Services
             }
             int totalItem = studentQuery.Count();
 
-            studentQuery = studentQuery.Skip(input.PageSize * (input.PageIndex - 1))
+            studentQuery = studentQuery
+                .Skip(input.PageSize * (input.PageIndex - 1))
                 .Take(input.PageSize);
 
             return new PageResultDto<List<Student>>
