@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebAPI.Entities;
 
-namespace WebAPI.Entities
+namespace WebAPI.Dbcontexts
 {
     public class ApplicationDbContext : DbContext
     {
@@ -27,7 +28,7 @@ namespace WebAPI.Entities
 
                 entity.Property(e => e.Name)
                     .IsUnicode()
-                    .HasMaxLength(100)
+                    .HasMaxLength(200)
                     .IsRequired();
 
                 entity.Property(e => e.StudentCode)
@@ -43,6 +44,13 @@ namespace WebAPI.Entities
                     .HasColumnType("nvarchar(256)")
                     .IsRequired();
             });
+
+            //modelBuilder.Entity<StudentClassroom>() //”Class many”
+            //    .HasOne<Student>() //”class one”
+            //    .WithMany()
+            //    .HasForeignKey(p => p.StudentId);
+
+
         }
     }
 }

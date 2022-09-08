@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using WebAPI.Entities;
+using WebAPI.Dbcontexts;
 using WebAPI.Services;
 
 namespace WebAPI
