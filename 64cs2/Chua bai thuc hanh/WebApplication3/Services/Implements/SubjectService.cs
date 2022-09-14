@@ -2,6 +2,7 @@
 using WebApplication3.Dto.Shared;
 using WebApplication3.Dto.Subjects;
 using WebApplication3.Entities;
+using WebApplication3.Exceptions;
 using WebApplication3.Services.Interfaces;
 
 namespace WebApplication3.Services.Implements
@@ -11,7 +12,6 @@ namespace WebApplication3.Services.Implements
         private readonly ILogger _logger;
         private readonly ApplicationDbContext _dbContext;
 
-        public SubjectService() { }
         public SubjectService(ILogger<StudentService> logger, ApplicationDbContext dbContext)
         {
             _logger = logger;
@@ -42,9 +42,9 @@ namespace WebApplication3.Services.Implements
 
             foreach (var subject in list)
             {
-                if (_dbContext.StudentSubject.Any(ss => ss.SubjectId == subject.Id))
+                if (_dbContext.StudentSubjects.Any(ss => ss.SubjectId == subject.Id))
                 {
-                    subject.PointAvg = _dbContext.StudentSubject.Where(ss => ss.SubjectId == subject.Id).Average(ss => ss.Point);
+                    subject.PointAvg = _dbContext.StudentSubjects.Where(ss => ss.SubjectId == subject.Id).Average(ss => ss.Point);
                 }
                 else
                 {
@@ -52,7 +52,7 @@ namespace WebApplication3.Services.Implements
                 }
             }
             int subjectId = 1;
-            float maxPoint = _dbContext.StudentSubject.Where(ss => ss.SubjectId == subjectId).Max(o => o.Point);
+            float maxPoint = _dbContext.StudentSubjects.Where(ss => ss.SubjectId == subjectId).Max(o => o.Point);
 
             //_dbContext.StudentSubject.Where(ss => ss.SubjectId == subjectId && ss.Point == maxPoint)
             //    .Join(_dbContext.Students, ss => ss.StudentId, s => s.Id, (ss, s) => new
@@ -64,7 +64,7 @@ namespace WebApplication3.Services.Implements
 
             //var result = 
 
-            var test = from studentSubject in _dbContext.StudentSubject.Where(ss => ss.SubjectId == subjectId && ss.Point == maxPoint)
+            var test = from studentSubject in _dbContext.StudentSubjects.Where(ss => ss.SubjectId == subjectId && ss.Point == maxPoint)
                        join student in _dbContext.Students on studentSubject.StudentId equals student.Id
                        select new //classDto
                        {
@@ -85,7 +85,7 @@ namespace WebApplication3.Services.Implements
         {
             if (_dbContext.Subjects.Any(s => s.SubjectCode == input.SubjectCode))
             {
-                throw new Exception($"Ma mon hoc \"{input.SubjectCode}\" da ton tai");
+                throw new UserFriendlyException($"Ma mon hoc \"{input.SubjectCode}\" da ton tai");
             }
             _dbContext.Subjects.Add(new Subject
             {
@@ -108,7 +108,7 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new Exception("Khong tim thay mon hoc");
+                throw new UserFriendlyException("Khong tim thay mon hoc");
         }
         public Subject GetbyId(int id)
         {
@@ -124,7 +124,7 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new Exception("Khong tim thay mon hoc");
+                throw new UserFriendlyException("Khong tim thay mon hoc");
         }
 
 

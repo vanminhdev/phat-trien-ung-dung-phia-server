@@ -52,6 +52,7 @@ namespace WebApplication3.Services.Implements
             });
             _dbContext.SaveChanges();
         }
+
         public void Update(UpdateStudentDto input)
         {
             var student = _dbContext.Students.FirstOrDefault(p => p.Id == input.StudentId);
@@ -83,7 +84,7 @@ namespace WebApplication3.Services.Implements
         }
         public void AddSubjectForStudent(int subjectId, int studentId)
         {
-            if (_dbContext.StudentSubject
+            if (_dbContext.StudentSubjects
                 .Any(sc => sc.StudentId == studentId && sc.SubjectId == subjectId))
             {
                 throw new UserFriendlyException("Sinh viên đã thêm môn học");
@@ -98,7 +99,7 @@ namespace WebApplication3.Services.Implements
             {
                 throw new UserFriendlyException("Khong tim thay sinh vien");
             }
-            _dbContext.StudentSubject.Add(new StudentSubject
+            _dbContext.StudentSubjects.Add(new StudentSubject
             {
                 SubjectId = subjectId,
                 StudentId = studentId,
@@ -107,15 +108,15 @@ namespace WebApplication3.Services.Implements
         }
         public void DeleteSubject(int subjectId, int studentId)
         {
-            var subject = _dbContext.StudentSubject
+            var subject = _dbContext.StudentSubjects
                 .FirstOrDefault(s => s.SubjectId == subjectId && s.StudentId == studentId);
             if (subject == null)
                 throw new UserFriendlyException("Hoc sinh khong theo hoc mon hoc nay");
-            _dbContext.StudentSubject.Remove(subject);
+            _dbContext.StudentSubjects.Remove(subject);
         }
         public void UpdatePoint(UpdatePointDto input)
         {
-            var studentSubject = _dbContext.StudentSubject
+            var studentSubject = _dbContext.StudentSubjects
                 .FirstOrDefault(s => s.SubjectId == input.SubjectId && s.StudentId == input.StudentId);
             if (studentSubject != null)
             {
@@ -128,7 +129,7 @@ namespace WebApplication3.Services.Implements
         }
         public List<StudentSubjectDto> GetListPointOfStudent(int studentId)
         {
-            var points = from studentSubject in _dbContext.StudentSubject
+            var points = from studentSubject in _dbContext.StudentSubjects
                          .Where(ss => ss.StudentId == studentId)
                          join subject in _dbContext.Subjects
                          on studentSubject.SubjectId equals subject.Id

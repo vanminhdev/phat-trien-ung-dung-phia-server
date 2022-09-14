@@ -7,7 +7,8 @@ namespace WebApplication3.DbContexts
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<StudentSubject> StudentSubject { get; set; }
+        public DbSet<StudentSubject> StudentSubjects { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ApplicationDbContext()
         {
@@ -65,6 +66,23 @@ namespace WebApplication3.DbContexts
                 entity.HasOne<Student>()
                     .WithMany()
                     .HasForeignKey(p => p.StudentId);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("User");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .IsRequired();
+                entity.Property(e => e.Username)
+                    .IsUnicode(false)
+                    .HasMaxLength(50)
+                    .IsRequired();
+                entity.Property(e => e.Password)
+                    .IsUnicode()
+                    .HasMaxLength(100)
+                    .IsRequired();
             });
         }
     }
