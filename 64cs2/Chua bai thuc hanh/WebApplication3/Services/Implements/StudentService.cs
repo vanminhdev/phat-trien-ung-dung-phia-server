@@ -124,20 +124,28 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new Exception("Khong tim thay sinh vien");
+                throw new UserFriendlyException("Khong tim thay sinh vien");
 
         }
         public List<StudentSubjectDto> GetListPointOfStudent(int studentId)
         {
+            //var points = from studentSubject in _dbContext.StudentSubjects
+            //             .Where(ss => ss.StudentId == studentId)
+            //             join subject in _dbContext.Subjects
+            //             on studentSubject.SubjectId equals subject.Id
+            //             select new StudentSubjectDto
+            //             {
+            //                 SubjectName = subject.SubjectName,
+            //                 Point = studentSubject.Point
+            //             };
+
             var points = from studentSubject in _dbContext.StudentSubjects
-                         .Where(ss => ss.StudentId == studentId)
-                         join subject in _dbContext.Subjects
-                         on studentSubject.SubjectId equals subject.Id
-                         select new StudentSubjectDto
-                         {
-                             SubjectName = subject.SubjectName,
-                             Point = studentSubject.Point
-                         };
+                       join subject in _dbContext.Subjects on new { studentSubject.SubjectId, studentSubject.StudentId } equals new { SubjectId = subject.Id, StudentId = studentId }
+                       select new StudentSubjectDto
+                       {
+                           SubjectName = subject.SubjectName,
+                           Point = studentSubject.Point
+                       };
 
             return points.ToList();
         }

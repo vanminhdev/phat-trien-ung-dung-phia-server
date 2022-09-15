@@ -60,6 +60,11 @@ namespace WebApplication3.DbContexts
 
             modelBuilder.Entity<StudentSubject>(entity =>
             {
+                entity.ToTable("StudentSubject");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .IsRequired();
                 entity.HasOne<Subject>()
                     .WithMany()
                     .HasForeignKey(p => p.SubjectId);
