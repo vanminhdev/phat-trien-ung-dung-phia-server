@@ -31,9 +31,9 @@ namespace WebApplication3
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidAudience = builder.Configuration["JWT:ValidAudience"],
-                    ValidateAudience = false,
+                    ValidateAudience = true,
                     ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-                    ValidateIssuer = false,
+                    ValidateIssuer = true,
                     ValidateLifetime = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
                     ClockSkew = TimeSpan.Zero // remove delay of token when expire,

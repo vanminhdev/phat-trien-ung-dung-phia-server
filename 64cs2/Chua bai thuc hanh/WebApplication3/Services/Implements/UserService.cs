@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WebApplication3.Constants;
 using WebApplication3.DbContexts;
 using WebApplication3.Dto.Users;
 using WebApplication3.Entities;
@@ -56,7 +57,8 @@ namespace WebApplication3.Services.Implements
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Name, user.Username)
+                    new Claim(JwtRegisteredClaimNames.Name, user.Username),
+                    new Claim(CustomClaimTypes.UserType, user.UserType.ToString(), ClaimValueTypes.Integer32)
                 };
 
                 var token = new JwtSecurityToken(

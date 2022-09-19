@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApplication3.Constants;
 using WebApplication3.Entities;
 
 namespace WebApplication3.DbContexts
@@ -87,6 +88,9 @@ namespace WebApplication3.DbContexts
                 entity.Property(e => e.Password)
                     .IsUnicode()
                     .HasMaxLength(100)
+                    .IsRequired();
+                entity.Property(e => e.UserType)
+                    .HasDefaultValue(UserTypes.Customer)
                     .IsRequired();
             });
         }
