@@ -19,7 +19,7 @@ namespace WebApplication3.Filters
             var user = context.HttpContext.User;
             var claims = user.Claims.ToList();
             //if else
-            var userTypeClaim = claims.FirstOrDefault(c => c.Type == "user_type");
+            var userTypeClaim = claims.FirstOrDefault(c => c.Type == CustomClaimTypes.UserType);
             if (userTypeClaim != null)
             {
                 int userType = int.Parse(userTypeClaim.Value);

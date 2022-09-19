@@ -11,7 +11,7 @@ using WebApplication3.Services.Interfaces;
 namespace WebApplication3.Controllers
 {
     [Authorize]
-    [AuthenticationFilter(UserTypes.Admin, UserTypes.Customer)]
+    [AuthenticationFilter(UserTypes.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ApiControllerBase
