@@ -15,5 +15,7 @@
             get => _password; 
             set => _password = value?.Trim(); 
         }
+
+        public int UserType { get; set; }
     }
 }

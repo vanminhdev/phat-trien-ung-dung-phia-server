@@ -37,7 +37,8 @@ namespace WebApplication3.Services.Implements
             _dbContext.Users.Add(new User
             {
                 Username = input.Username,
-                Password = CommonUtils.CreateMD5(input.Password)
+                Password = CommonUtils.CreateMD5(input.Password),
+                UserType = input.UserType
             });
             _dbContext.SaveChanges();
         }
@@ -58,7 +59,7 @@ namespace WebApplication3.Services.Implements
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Name, user.Username),
-                    new Claim(CustomClaimTypes.UserType, user.UserType.ToString(), ClaimValueTypes.Integer32)
+                    new Claim(CustomClaimTypes.UserType, user.UserType.ToString())
                 };
 
                 var token = new JwtSecurityToken(
