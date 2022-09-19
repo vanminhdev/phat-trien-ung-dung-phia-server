@@ -4,11 +4,11 @@ using WebApplication3.Constants;
 
 namespace WebApplication3.Filters
 {
-    public class AuthenticationFilter : Attribute, IAuthorizationFilter
+    public class AuthorizationFilter : Attribute, IAuthorizationFilter
     {
         private readonly int[] _userTypes;
 
-        public AuthenticationFilter(params int[] userTypes)
+        public AuthorizationFilter(params int[] userTypes)
         {
             _userTypes = userTypes;
         }
