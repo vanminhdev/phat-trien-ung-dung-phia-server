@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
 
-namespace WebApplication3.Dto.Shared
+namespace WebApplication3.Dtos.Shared
 {
     public class FilterDto
     {

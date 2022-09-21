@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Dto.Users
+﻿namespace WebApplication3.Dtos.Users
 {
     public class CreateUserDto
     {

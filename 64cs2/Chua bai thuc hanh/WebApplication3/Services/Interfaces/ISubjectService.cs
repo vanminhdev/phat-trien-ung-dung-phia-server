@@ -1,5 +1,5 @@
-﻿using WebApplication3.Dto.Shared;
-using WebApplication3.Dto.Subjects;
+﻿using WebApplication3.Dtos.Shared;
+using WebApplication3.Dtos.Subjects;
 using WebApplication3.Entities;
 
 namespace WebApplication3.Services.Interfaces

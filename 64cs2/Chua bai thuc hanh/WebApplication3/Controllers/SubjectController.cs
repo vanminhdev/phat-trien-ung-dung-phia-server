@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication3.Dto.Shared;
-using WebApplication3.Dto.Subjects;
+using WebApplication3.Dtos.Shared;
+using WebApplication3.Dtos.Subjects;
 using WebApplication3.Entities;
 using WebApplication3.Services.Interfaces;
 

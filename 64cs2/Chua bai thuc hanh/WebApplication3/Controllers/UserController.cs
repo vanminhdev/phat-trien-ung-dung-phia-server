@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication3.Dto.Users;
+using WebApplication3.Dtos.Users;
 using WebApplication3.Services.Interfaces;
 
 namespace WebApplication3.Controllers

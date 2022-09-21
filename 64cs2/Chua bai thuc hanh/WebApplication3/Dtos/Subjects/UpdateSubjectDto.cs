@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Dto.Subjects
+﻿namespace WebApplication3.Dtos.Subjects
 {
     public class UpdateSubjectDto : CreateSubjectDto
     {

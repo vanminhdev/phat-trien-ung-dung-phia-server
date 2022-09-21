@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication3.Constants;
-using WebApplication3.Dto.Shared;
-using WebApplication3.Dto.Students;
+using WebApplication3.Dtos.Shared;
+using WebApplication3.Dtos.Students;
 using WebApplication3.Entities;
 using WebApplication3.Filters;
 using WebApplication3.Services.Interfaces;

@@ -1,4 +1,4 @@
-﻿using WebApplication3.Dto.Users;
+﻿using WebApplication3.Dtos.Users;
 
 namespace WebApplication3.Services.Interfaces
 {

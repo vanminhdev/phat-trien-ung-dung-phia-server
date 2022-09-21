@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using WebApplication3.Constants;
 using WebApplication3.DbContexts;
-using WebApplication3.Dto.Users;
+using WebApplication3.Dtos.Users;
 using WebApplication3.Entities;
 using WebApplication3.Exceptions;
 using WebApplication3.Services.Interfaces;

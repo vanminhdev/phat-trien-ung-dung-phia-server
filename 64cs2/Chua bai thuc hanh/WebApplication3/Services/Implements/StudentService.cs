@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using WebApplication3.DbContexts;
-using WebApplication3.Dto.Shared;
-using WebApplication3.Dto.Students;
+using WebApplication3.Dtos.Shared;
+using WebApplication3.Dtos.Students;
 using WebApplication3.Entities;
 using WebApplication3.Exceptions;
 using WebApplication3.Services.Interfaces;

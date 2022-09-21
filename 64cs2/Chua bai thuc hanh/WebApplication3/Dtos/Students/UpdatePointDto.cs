@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Dto.Students
+﻿namespace WebApplication3.Dtos.Students
 {
     public class UpdatePointDto
     {
