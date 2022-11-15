@@ -1,8 +1,15 @@
-﻿namespace WebApplication3.Dtos.Users
+﻿using System.ComponentModel.DataAnnotations;
+using WebApplication3.Constants;
+using WebApplication3.Utils;
+
+namespace WebApplication3.Dtos.Users
 {
     public class CreateUserDto
     {
         private string _username;
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Tên tài khoản dài từ 3 đến 30 ký tự", MinimumLength = 3)]
         public string Username 
         { 
             get => _username; 
@@ -10,12 +17,16 @@
         }
 
         private string _password;
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Mật khẩu dài từ 3 đến 30 ký tự", MinimumLength = 3)]
         public string Password 
         { 
             get => _password; 
             set => _password = value?.Trim(); 
         }
 
+        [IntegerRange(AllowableValues = new int[] { UserTypes.Admin, UserTypes.Customer })]
         public int UserType { get; set; }
     }
 }
