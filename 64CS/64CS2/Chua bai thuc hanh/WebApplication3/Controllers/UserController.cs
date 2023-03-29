@@ -5,7 +5,7 @@ using WebApplication3.Services.Interfaces;
 
 namespace WebApplication3.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ApiControllerBase
     {

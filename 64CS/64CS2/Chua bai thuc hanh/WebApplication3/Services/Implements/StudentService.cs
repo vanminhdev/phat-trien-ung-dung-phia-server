@@ -42,7 +42,7 @@ namespace WebApplication3.Services.Implements
         {
             if (_dbContext.Students.Any(s => s.StudentCode == input.StudentCode))
             {
-                throw new UserFriendlyException($"Ma sinh vien \"{input.StudentCode}\" da ton tai");
+                throw new UserFriendlyException($"Mã sinh viên \"{input.StudentCode}\" đã tồn tại");
             }
             _dbContext.Students.Add(new Student
             {
@@ -64,13 +64,15 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new UserFriendlyException("Khong tim thay sinh vien");
+                throw new UserFriendlyException("Không tìm thấy sinh viên");
         }
+
         public Student GetbyId(int id)
         {
             var student = _dbContext.Students.FirstOrDefault((p) => p.Id == id);
             return student;
         }
+
         public void Delete(int id)
         {
             var student = _dbContext.Students.FirstOrDefault((p) => p.Id == id);
@@ -80,7 +82,7 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new UserFriendlyException("Khong tim thay sinh vien");
+                throw new UserFriendlyException("Không tìm thấy sinh viên");
         }
         public void AddSubjectForStudent(int subjectId, int studentId)
         {
@@ -92,12 +94,12 @@ namespace WebApplication3.Services.Implements
             var subject = _dbContext.Subjects.FirstOrDefault(c => c.Id == subjectId);
             if (subject == null)
             {
-                throw new UserFriendlyException("Khong tim thay mon hoc");
+                throw new UserFriendlyException("Không tìm thấy môn học");
             }
             var student = _dbContext.Students.FirstOrDefault(c => c.Id == studentId);
             if (student == null)
             {
-                throw new UserFriendlyException("Khong tim thay sinh vien");
+                throw new UserFriendlyException("Không tìm thấy sinh viên");
             }
             _dbContext.StudentSubjects.Add(new StudentSubject
             {
@@ -106,14 +108,16 @@ namespace WebApplication3.Services.Implements
             });
             _dbContext.SaveChanges();
         }
+
         public void DeleteSubject(int subjectId, int studentId)
         {
             var subject = _dbContext.StudentSubjects
                 .FirstOrDefault(s => s.SubjectId == subjectId && s.StudentId == studentId);
             if (subject == null)
-                throw new UserFriendlyException("Hoc sinh khong theo hoc mon hoc nay");
+                throw new UserFriendlyException("Sinh viên không theo học môn học này");
             _dbContext.StudentSubjects.Remove(subject);
         }
+
         public void UpdatePoint(UpdatePointDto input)
         {
             var studentSubject = _dbContext.StudentSubjects
@@ -124,21 +128,11 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new UserFriendlyException("Khong tim thay sinh vien");
+                throw new UserFriendlyException("Không tìm thấy sinh viên");
 
         }
         public List<StudentSubjectDto> GetListPointOfStudent(int studentId)
         {
-            //var points = from studentSubject in _dbContext.StudentSubjects
-            //             .Where(ss => ss.StudentId == studentId)
-            //             join subject in _dbContext.Subjects
-            //             on studentSubject.SubjectId equals subject.Id
-            //             select new StudentSubjectDto
-            //             {
-            //                 SubjectName = subject.SubjectName,
-            //                 Point = studentSubject.Point
-            //             };
-
             var points = from studentSubject in _dbContext.StudentSubjects
                        join subject in _dbContext.Subjects on new { studentSubject.SubjectId, studentSubject.StudentId } equals new { SubjectId = subject.Id, StudentId = studentId }
                        select new StudentSubjectDto

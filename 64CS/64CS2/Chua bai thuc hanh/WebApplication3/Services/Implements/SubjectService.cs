@@ -85,7 +85,7 @@ namespace WebApplication3.Services.Implements
         {
             if (_dbContext.Subjects.Any(s => s.SubjectCode == input.SubjectCode))
             {
-                throw new UserFriendlyException($"Ma mon hoc \"{input.SubjectCode}\" da ton tai");
+                throw new UserFriendlyException($"Mã môn học \"{input.SubjectCode}\" đã tồn tại");
             }
             _dbContext.Subjects.Add(new Subject
             {
@@ -108,7 +108,7 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new UserFriendlyException("Khong tim thay mon hoc");
+                throw new UserFriendlyException("Không tìm thấy môn học");
         }
         public Subject GetbyId(int id)
         {
@@ -124,7 +124,7 @@ namespace WebApplication3.Services.Implements
                 _dbContext.SaveChanges();
             }
             else
-                throw new UserFriendlyException("Khong tim thay mon hoc");
+                throw new UserFriendlyException("Không tìm thấy môn học");
         }
 
 

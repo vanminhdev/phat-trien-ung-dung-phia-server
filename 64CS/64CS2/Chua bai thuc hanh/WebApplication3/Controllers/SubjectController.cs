@@ -8,8 +8,8 @@ using WebApplication3.Services.Interfaces;
 
 namespace WebApplication3.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
+    //[Authorize]
+    [Route("api/subject")]
     [ApiController]
     public class SubjectController : ApiControllerBase
     {

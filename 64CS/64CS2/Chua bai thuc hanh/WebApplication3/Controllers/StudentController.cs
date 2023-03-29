@@ -10,9 +10,9 @@ using WebApplication3.Services.Interfaces;
 
 namespace WebApplication3.Controllers
 {
-    [Authorize]
-    [AuthorizationFilter(UserTypes.Admin)]
-    [Route("api/[controller]")]
+    //[Authorize]
+    //[AuthorizationFilter(UserTypes.Admin)]
+    [Route("api/student")]
     [ApiController]
     public class StudentController : ApiControllerBase
     {
@@ -40,7 +40,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpPost("create-student")]
-        public IActionResult CreateStudent([FromForm] CreateStudentDto input)
+        public IActionResult CreateStudent([FromBody] CreateStudentDto input)
         {
             try
             {
@@ -52,6 +52,7 @@ namespace WebApplication3.Controllers
                 return ReturnException(ex);
             }
         }
+
         [HttpGet("get-student-by-id/{id}")]
         public IActionResult GetById([FromQuery] int id)
         {
@@ -65,6 +66,7 @@ namespace WebApplication3.Controllers
                 return ReturnException(ex);
             }
         }
+
         [HttpPut("update")]
         public IActionResult UpdateById([FromBody] UpdateStudentDto input)
         {
@@ -78,6 +80,7 @@ namespace WebApplication3.Controllers
                 return ReturnException(ex);
             }
         }
+
         [HttpDelete("delete/{id}")]
         public IActionResult DeleteById(int id)
         {
@@ -93,7 +96,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpPatch("update-point")]
-        public IActionResult updatePoint([FromBody] UpdatePointDto input)
+        public IActionResult UpdatePoint([FromBody] UpdatePointDto input)
         {
             try
             {
