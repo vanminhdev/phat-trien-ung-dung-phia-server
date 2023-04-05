@@ -6,6 +6,14 @@
         {
             List<Student> students = new List<Student>();
 
+            var student1 = new Student
+            {
+                Name = "Nguyen Van B",
+                StudentCode = "5",
+                DateOfBirth = new DateTime(2002, 1, 1)
+            };
+            students.Add(student1);
+
             students.Add(new Student
             {
                 Name = "Nguyen Van A",

@@ -19,7 +19,7 @@
 
         static void Main(string[] args)
         {
-            int a = 1;
+            int a = 2;
             int b = a--;
             Console.WriteLine(b);
 
