@@ -75,7 +75,7 @@ namespace DemoWebAPI.Controllers
             User userFind = _users.FirstOrDefault(u => u.Id == id);
             if (userFind == null) //kiểm tra dữ liệu
             {
-                return NotFound($"Không tìm thấy user có Id = {id}");//Http status code: 404
+                return NotFound(new { message = $"Không tìm thấy user có Id = {id}" });//Http status code: 404
             }
             return Ok(userFind);
         }
@@ -103,7 +103,7 @@ namespace DemoWebAPI.Controllers
                 var userFind = _users.FirstOrDefault(u => u.Id == id);
                 if (userFind == null)
                 {
-                    return NotFound($"Không tìm thấy user có Id = {id}");
+                    return NotFound(new { message = $"Không tìm thấy user có Id = {id}" });
                 }
                 _users.Remove(userFind);
                 return Ok();
