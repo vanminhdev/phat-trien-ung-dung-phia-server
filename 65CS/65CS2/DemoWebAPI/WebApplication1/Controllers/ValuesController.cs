@@ -17,7 +17,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("get-by-id")]
+        [HttpGet]
+        [Route("get-by-id")]
         public string Get(int id, string name)
         {
             return "value";

@@ -20,5 +20,31 @@ namespace WebApplication1.Services.Implements
                 //Name = input.Name,
             });
         }
+
+        public void Update(UpdateStudentDto input)
+        {
+            var student = _students.FirstOrDefault(s => s.Id == input.Id);
+            if (student == null)
+            {
+                throw new Exception($"Không tìm thấy sinh viên có id = {input.Id}");
+            }
+            student.Name = input.Name;
+            student.Age = input.Age;
+        }
+
+        public List<StudentDto> GetAll()
+        {
+            var results = new List<StudentDto>();
+            foreach (var student in _students)
+            {
+                results.Add(new StudentDto 
+                { 
+                    Id = student.Id,
+                    Name = student.Name,
+                    Age = student.Age
+                });
+            }
+            return results;
+        }
     }
 }
