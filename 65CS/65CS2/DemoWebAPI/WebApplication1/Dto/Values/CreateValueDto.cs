@@ -1,8 +1,8 @@
-﻿namespace WebApplication1.Dto
+﻿namespace WebApplication1.Dto.Values
 {
     public class CreateValueDto
     {
         public string Name { get; set; }
-        public int Age { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }
