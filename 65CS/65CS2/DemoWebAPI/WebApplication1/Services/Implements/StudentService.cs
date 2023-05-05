@@ -16,7 +16,7 @@ namespace WebApplication1.Services.Implements
             // thêm sinh viên vào list
             _students.Add(new Student
             {
-                Id = _id++,
+                Id = ++_id,
                 //Name = input.Name,
             });
         }

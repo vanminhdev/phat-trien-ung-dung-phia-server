@@ -11,9 +11,9 @@ namespace WebApplication1.Dto.Student
         [Range(1, int.MaxValue, ErrorMessage = "Tuổi phải lớn hơn 0")]
         public int Age { get; set; }
 
-        //public DateTime DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
-        //[StringRange(AllowableValues = new string[] { "NT", "2NT" })]
-        //public string StudentType { get; set; }
+        [StringRange(AllowableValues = new string[] { "NT", "2NT" })]
+        public string StudentType { get; set; }
     }
 }

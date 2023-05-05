@@ -1,5 +1,6 @@
 ﻿using WebApplication1.Dto.Student;
 using WebApplication1.Entities;
+using WebApplication1.Exceptions;
 using WebApplication1.Services.Interfaces;
 
 namespace WebApplication1.Services.Implements
@@ -27,7 +28,7 @@ namespace WebApplication1.Services.Implements
             var student = _students.FirstOrDefault(s => s.Id == input.Id);
             if (student == null)
             {
-                throw new Exception($"Không tìm thấy sinh viên có id = {input.Id}");
+                throw new UserFriendlyException($"Không tìm thấy sinh viên có id = {input.Id}");
             }
             student.Name = input.Name;
             student.Age = input.Age;

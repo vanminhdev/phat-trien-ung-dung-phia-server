@@ -23,11 +23,11 @@ namespace WebApplication1.Controllers
             return "value";
         }
 
-        //[HttpGet("{id}")]
-        //public string Get2(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet("get-by-id-2/{id}")]
+        public string Get2(int id)
+        {
+            return "value";
+        }
 
         // POST api/<ValuesController>
         [HttpPost]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using WebApplication1.Dto.Student;
 using WebApplication1.Services.Implements;
 using WebApplication1.Services.Interfaces;
@@ -56,6 +57,12 @@ namespace WebApplication1.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("get-by-id/{id}")]
+        public IActionResult GetById([Range(1, int.MaxValue, ErrorMessage = "Id phải lớn hơn 0")] int id)
+        {
+            return Ok();
         }
     }
 }

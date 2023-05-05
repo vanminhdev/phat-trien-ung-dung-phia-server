@@ -1,4 +1,5 @@
 
+using WebApplication1.Filters;
 using WebApplication1.Services.Implements;
 using WebApplication1.Services.Interfaces;
 
@@ -12,7 +13,10 @@ namespace WebApplication1
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<ExceptionFilter>();
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

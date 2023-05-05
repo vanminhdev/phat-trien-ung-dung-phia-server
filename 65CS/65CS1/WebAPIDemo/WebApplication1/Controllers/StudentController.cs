@@ -18,44 +18,21 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Create(CreateStudentDto input)
+        public void Create(CreateStudentDto input)
         {
-            try
-            {
-                _studentService.Create(input);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _studentService.Create(input);
         }
 
         [HttpPut("update")]
-        public IActionResult Update(UpdateStudentDto input)
+        public void Update(UpdateStudentDto input)
         {
-            try
-            {
-                _studentService.Update(input);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _studentService.Update(input);
         }
 
         [HttpGet("get-all")]
-        public IActionResult GetAll()
+        public List<StudentDto> GetAll()
         {
-            try
-            {
-                return Ok(_studentService.GetAll());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return _studentService.GetAll();
         }
     }
 }
