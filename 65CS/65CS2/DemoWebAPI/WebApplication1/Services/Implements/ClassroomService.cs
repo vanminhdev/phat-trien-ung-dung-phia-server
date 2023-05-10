@@ -1,4 +1,6 @@
-﻿using WebApplication1.DbContexts;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Xml.Linq;
+using WebApplication1.DbContexts;
 using WebApplication1.Dto.Student;
 using WebApplication1.Entities;
 using WebApplication1.Services.Interfaces;
@@ -32,11 +34,17 @@ namespace WebApplication1.Services.Implements
         public List<StudentDto> GetAllStudent2(int classroomId)
         {
             var list = _context.StudentClassroom.Join(_context.Students, sc => sc.StudentId, s => s.Id,
-                (studentClassroom, student) => new StudentDto
+                (studentClassroom, student) => new
                 {
-                    Id = student.Id,
-                    Name = student.Name,
-                    Age = student.Age,
+                    studentClassroom,
+                    student
+                })
+                .Where(s => s.studentClassroom.ClassroomId == classroomId)
+                .Select(s => new StudentDto
+                {
+                    Id = s.student.Id,
+                    Name = s.student.Name,
+                    Age = s.student.Age,
                 })
                 .OrderByDescending(s => s.Age)
                 .ThenByDescending(s => s.Id)
@@ -62,6 +70,15 @@ namespace WebApplication1.Services.Implements
                             Name = student.Name,
                             Age = student.Age,
                         };
+
+            //viết ngắn gọn hơn
+            //var studentQuery2 = studentClassroomQuery.Where(s => s.Age == maxAge).Select(s => new StudentDto
+            //{
+            //    Id = s.Id,
+            //    Name = s.Name,
+            //    Age = s.Age,
+            //});
+
             return studentQuery.ToList();
 
             //return studentClassroomQuery.Where(s => s.Age == maxAge).Select(s => new StudentDto
