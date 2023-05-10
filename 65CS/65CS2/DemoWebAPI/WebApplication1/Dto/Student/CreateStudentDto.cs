@@ -13,7 +13,7 @@ namespace WebApplication1.Dto.Student
 
         public DateTime DateOfBirth { get; set; }
 
-        [StringRange(AllowableValues = new string[] { "NT", "2NT" })]
-        public string StudentType { get; set; }
+        //[StringRange(AllowableValues = new string[] { "NT", "2NT" })]
+        //public string StudentType { get; set; }
     }
 }

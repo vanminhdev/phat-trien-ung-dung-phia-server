@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.ComponentModel.DataAnnotations;
 using WebApplication1.Dto.Student;
+using WebApplication1.Filters;
 using WebApplication1.Services.Implements;
 using WebApplication1.Services.Interfaces;
 
@@ -21,42 +24,21 @@ namespace WebApplication1.Controllers
         [HttpPost("create")]
         public IActionResult Create(CreateStudentDto input)
         {
-            try
-            {
-                _studentService.Create(input);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _studentService.Create(input);
+            return Ok();
         }
 
         [HttpPut("update")]
         public IActionResult Update(UpdateStudentDto input)
         {
-            try
-            {
-                _studentService.Update(input);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _studentService.Update(input);
+            return Ok();
         }
 
         [HttpGet("get-all")]
         public IActionResult GetAll()
         {
-            try
-            {
-                return Ok(_studentService.GetAll());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_studentService.GetAll());
         }
 
         [HttpGet("get-by-id/{id}")]
