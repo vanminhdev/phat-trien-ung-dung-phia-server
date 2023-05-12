@@ -19,7 +19,10 @@ namespace WebApplication1.DbContexts
             //cách 1: dùng Fluent API,
             //modelBuilder.Entity<Student>(entity =>
             //{
+            //    entity.ToTable("Student");
             //    entity.HasKey(e => e.Id);
+            //    entity.Property(e => e.Id)
+            //          .ValueGeneratedOnAdd();
             //    entity.Property(e => e.Name)
             //        .IsUnicode()
             //        .HasMaxLength(100)
