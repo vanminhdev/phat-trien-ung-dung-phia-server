@@ -1,10 +1,21 @@
 ﻿using De1.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace De1.DbContexts
 {
-    public class ApplicationDbContext
+    public class ApplicationDbContext : DbContext
     {
-        public List<User> Users { get; set; }
-        public static int UserId = 0;
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .Property(e => e.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+        }
     }
 }

@@ -19,12 +19,12 @@ namespace De1.Services.Implements
         {
             _dbContext.Users.Add(new User
             {
-                Id = ++ApplicationDbContext.UserId,
                 Username = input.Username,
                 Password = input.Password,
                 Email = input.Email,
                 CreatedDate = DateTime.Now,
             });
+            _dbContext.SaveChanges();
         }
 
         public void DeleteUser(int userId)
@@ -35,6 +35,7 @@ namespace De1.Services.Implements
                 throw new Exception("Không tìm thấy user");
             }
             _dbContext.Users.Remove(user);
+            _dbContext.SaveChanges();
         }
 
         public PageResultDto<UserDto> GetAll(UserFilterDto input)
@@ -66,7 +67,9 @@ namespace De1.Services.Implements
                          };
 
             result.TotalItem = query.Count();
-            query = query.Skip(input.Skip())
+            query = query
+                .OrderByDescending(u => u.UserName)
+                .Skip(input.Skip())
                 .Take(input.PageSize);
 
             result.Items = query.ToList();
@@ -84,8 +87,7 @@ namespace De1.Services.Implements
             user.Username = input.Username;
             user.Password = input.Password;
             user.Email = input.Email;
+            _dbContext.SaveChanges();
         }
-
-
     }
 }
