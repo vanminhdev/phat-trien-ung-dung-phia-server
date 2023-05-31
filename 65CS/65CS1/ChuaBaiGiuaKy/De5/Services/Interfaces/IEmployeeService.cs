@@ -8,5 +8,7 @@ namespace De5.Services.Interfaces
         PageResultDto<EmployeeDto> GetAll(EmployeeFilterDto input);
         void CreateEmpolyee(CreateEmployeeDto input);
         void UpdateEmpolyee(UpdateEmployeeDto input);
+        EmployeeDto GetById(int id);
+        void Delete(int id);
     }
 }

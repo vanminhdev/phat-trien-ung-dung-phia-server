@@ -37,10 +37,15 @@ namespace De5.Services.Implements
         {
             var result = new PageResultDto<EmployeeDto>();
             var query = _dbContext.Employees
-                .Where(e => e.Name != null && e.Name.Contains(input.Keyword));
+                .Where(e => (input.Keyword == null || e.Name.Contains(input.Keyword))
+                            && (input.StartAge == null || e.Age >= input.StartAge)
+                            && (input.EndAge == null || e.Age <= input.EndAge));
 
             result.TotalItem = query.Count();
-            query = query.Skip(input.Skip())
+            query = query
+                .OrderByDescending(e => e.Age)
+                .ThenByDescending(e => e.Id)
+                .Skip(input.Skip())
                 .Take(input.PageSize);
 
             result.Items = query.Select(x => new EmployeeDto
@@ -50,7 +55,7 @@ namespace De5.Services.Implements
                 Name = x.Name,
                 Adress = x.Address,
                 Age = x.Age,
-            }).ToList();
+            });
             return result;
         }
 
@@ -71,6 +76,33 @@ namespace De5.Services.Implements
             employee.Age = input.Age;
             employee.Address = input.Address;
             _dbContext.SaveChanges();
+        }
+
+        public EmployeeDto GetById(int id)
+        {
+            var employee = _dbContext.Employees.FirstOrDefault(e => e.Id == id);
+            if (employee == null)
+            {
+                throw new Exception("Không tìm thấy thông tin nhân viên");
+            }
+            return new EmployeeDto
+            {
+                Id = employee.Id,
+                Age = employee.Age,
+                Adress = employee.Address,
+                Name = employee.Name,
+                Code = employee.Code,
+            };
+        }
+
+        public void Delete(int id)
+        {
+            var employee = _dbContext.Employees.FirstOrDefault(e => e.Id == id);
+            if (employee == null)
+            {
+                throw new Exception("Không tìm thấy thông tin nhân viên");
+            }
+            _dbContext.Employees.Remove(employee);
         }
     }
 }

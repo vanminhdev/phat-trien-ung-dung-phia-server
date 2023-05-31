@@ -2,7 +2,7 @@
 {
     public class PageResultDto<T>
     {
-        public List<T> Items { get; set; }
+        public IEnumerable<T> Items { get; set; }
         public int TotalItem { get; set; }
     }
 }

@@ -62,8 +62,21 @@ namespace De5.Controllers
         {
             try
             {
-                //_employeeService.DeleteEmployee(id);
+                _employeeService.Delete(id);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("get-by-id/{id}")]
+        public IActionResult GetEmployeeById(int id)
+        {
+            try
+            {
+                return Ok(_employeeService.GetById(id));
             }
             catch (Exception ex)
             {
