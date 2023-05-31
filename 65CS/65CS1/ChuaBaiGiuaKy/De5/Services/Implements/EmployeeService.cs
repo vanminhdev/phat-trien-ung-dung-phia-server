@@ -37,21 +37,20 @@ namespace De5.Services.Implements
         {
             var result = new PageResultDto<EmployeeDto>();
             var query = _dbContext.Employees
-                .Where(e => e.Name != null && e.Name.Contains(input.Keyword))
-                .Select(x => new EmployeeDto
-                {
-                    Id = x.Id,
-                    Code = x.Code,
-                    Name = x.Name,
-                    Adress = x.Address,
-                    Age = x.Age,
-                });
+                .Where(e => e.Name != null && e.Name.Contains(input.Keyword));
 
             result.TotalItem = query.Count();
             query = query.Skip(input.Skip())
                 .Take(input.PageSize);
 
-            result.Items = query.ToList();
+            result.Items = query.Select(x => new EmployeeDto
+            {
+                Id = x.Id,
+                Code = x.Code,
+                Name = x.Name,
+                Adress = x.Address,
+                Age = x.Age,
+            }).ToList();
             return result;
         }
 
