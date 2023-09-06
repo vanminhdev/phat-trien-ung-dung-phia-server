@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Entities
+﻿namespace WebApplication.Entities
 {
     public class StudentSubject
     {

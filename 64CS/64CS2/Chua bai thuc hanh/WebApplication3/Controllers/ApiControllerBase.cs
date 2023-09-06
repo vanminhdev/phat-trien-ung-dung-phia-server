@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebApplication3.Dto.Exceptions;
-using WebApplication3.Exceptions;
+using WebApplication.Dto.Exceptions;
+using WebApplication.Exceptions;
 
-namespace WebApplication3.Controllers
+namespace WebApplication.Controllers
 {
     public class ApiControllerBase : ControllerBase
     {

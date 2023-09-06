@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Dtos.Users
+﻿namespace WebApplication.Dtos.Users
 {
     public class LoginDto
     {

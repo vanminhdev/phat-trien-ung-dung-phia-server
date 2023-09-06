@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Exceptions
+﻿namespace WebApplication.Exceptions
 {
     public class UserFriendlyException : Exception
     {

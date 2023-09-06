@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Dto.Exceptions
+﻿namespace WebApplication.Dto.Exceptions
 {
     public class ExceptionBody
     {

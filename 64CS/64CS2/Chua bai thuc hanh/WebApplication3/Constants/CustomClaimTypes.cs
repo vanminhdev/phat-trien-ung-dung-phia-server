@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Constants
+﻿namespace WebApplication.Constants
 {
     public static class CustomClaimTypes
     {

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication3.Dtos.Shared;
-using WebApplication3.Dtos.Subjects;
-using WebApplication3.Entities;
-using WebApplication3.Services.Interfaces;
+using WebApplication.Dtos.Shared;
+using WebApplication.Dtos.Subjects;
+using WebApplication.Entities;
+using WebApplication.Services.Interfaces;
 
-namespace WebApplication3.Controllers
+namespace WebApplication.Controllers
 {
     //[Authorize]
     [Route("api/subject")]

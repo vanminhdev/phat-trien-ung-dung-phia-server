@@ -2,15 +2,15 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using WebApplication3.Constants;
-using WebApplication3.DbContexts;
-using WebApplication3.Dtos.Users;
-using WebApplication3.Entities;
-using WebApplication3.Exceptions;
-using WebApplication3.Services.Interfaces;
-using WebApplication3.Utils;
+using WebApplication.Constants;
+using WebApplication.DbContexts;
+using WebApplication.Dtos.Users;
+using WebApplication.Entities;
+using WebApplication.Exceptions;
+using WebApplication.Services.Interfaces;
+using WebApplication.Utils;
 
-namespace WebApplication3.Services.Implements
+namespace WebApplication.Services.Implements
 {
     public class UserService : IUserService
     {

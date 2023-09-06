@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using WebApplication3.DbContexts;
-using WebApplication3.Services.Implements;
-using WebApplication3.Services.Interfaces;
+using WebApplication.DbContexts;
+using WebApplication.Services.Implements;
+using WebApplication.Services.Interfaces;
 
-namespace WebApplication3
+namespace WebApplication
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
             // Add services to the container.
             builder.Services.AddDbContext<ApplicationDbContext>(options => {

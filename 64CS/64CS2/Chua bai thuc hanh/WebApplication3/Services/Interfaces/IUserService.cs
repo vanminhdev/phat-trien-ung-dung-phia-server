@@ -1,6 +1,6 @@
-﻿using WebApplication3.Dtos.Users;
+﻿using WebApplication.Dtos.Users;
 
-namespace WebApplication3.Services.Interfaces
+namespace WebApplication.Services.Interfaces
 {
     public interface IUserService
     {

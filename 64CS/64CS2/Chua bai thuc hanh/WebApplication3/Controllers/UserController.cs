@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication3.Dtos.Users;
-using WebApplication3.Services.Interfaces;
+using WebApplication.Dtos.Users;
+using WebApplication.Services.Interfaces;
 
-namespace WebApplication3.Controllers
+namespace WebApplication.Controllers
 {
     [Route("api/user")]
     [ApiController]

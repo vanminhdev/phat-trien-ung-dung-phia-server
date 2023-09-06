@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApplication3.DbContexts;
+using WebApplication.DbContexts;
 
 #nullable disable
 
-namespace WebApplication3.Migrations
+namespace WebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220919020153_ThemUserType")]

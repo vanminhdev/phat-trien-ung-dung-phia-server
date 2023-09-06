@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace WebApplication3.Migrations
+namespace WebApplication.Migrations
 {
     public partial class managementStudent1 : Migration
     {

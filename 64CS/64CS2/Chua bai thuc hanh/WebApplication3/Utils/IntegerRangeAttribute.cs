@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication3.Utils
+namespace WebApplication.Utils
 {
     /// <summary>
     /// Cho phép một trong các giá trị, nếu là null thì bỏ qua

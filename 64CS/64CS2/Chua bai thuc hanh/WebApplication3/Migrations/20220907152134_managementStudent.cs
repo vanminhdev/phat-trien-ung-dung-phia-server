@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WebApplication3.Migrations
+namespace WebApplication.Migrations
 {
     public partial class managementStudent : Migration
     {

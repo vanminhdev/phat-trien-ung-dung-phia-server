@@ -1,11 +1,11 @@
-﻿using WebApplication3.DbContexts;
-using WebApplication3.Dtos.Shared;
-using WebApplication3.Dtos.Subjects;
-using WebApplication3.Entities;
-using WebApplication3.Exceptions;
-using WebApplication3.Services.Interfaces;
+﻿using WebApplication.DbContexts;
+using WebApplication.Dtos.Shared;
+using WebApplication.Dtos.Subjects;
+using WebApplication.Entities;
+using WebApplication.Exceptions;
+using WebApplication.Services.Interfaces;
 
-namespace WebApplication3.Services.Implements
+namespace WebApplication.Services.Implements
 {
     public class SubjectService : ISubjectService
     {

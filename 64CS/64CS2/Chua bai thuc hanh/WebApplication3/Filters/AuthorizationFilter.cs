@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using WebApplication3.Constants;
+using WebApplication.Constants;
 
-namespace WebApplication3.Filters
+namespace WebApplication.Filters
 {
     public class AuthorizationFilter : Attribute, IAuthorizationFilter
     {

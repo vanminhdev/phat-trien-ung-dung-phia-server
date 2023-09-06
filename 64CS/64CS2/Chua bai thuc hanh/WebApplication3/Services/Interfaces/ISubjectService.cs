@@ -1,8 +1,8 @@
-﻿using WebApplication3.Dtos.Shared;
-using WebApplication3.Dtos.Subjects;
-using WebApplication3.Entities;
+﻿using WebApplication.Dtos.Shared;
+using WebApplication.Dtos.Subjects;
+using WebApplication.Entities;
 
-namespace WebApplication3.Services.Interfaces
+namespace WebApplication.Services.Interfaces
 {
     public interface ISubjectService
     {

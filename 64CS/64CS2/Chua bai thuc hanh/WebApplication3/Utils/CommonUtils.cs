@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace WebApplication3.Utils
+namespace WebApplication.Utils
 {
     public static class CommonUtils
     {

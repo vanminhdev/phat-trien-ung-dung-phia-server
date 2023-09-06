@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication3.Constants;
-using WebApplication3.Dtos.Shared;
-using WebApplication3.Dtos.Students;
-using WebApplication3.Entities;
-using WebApplication3.Filters;
-using WebApplication3.Services.Interfaces;
+using WebApplication.Constants;
+using WebApplication.Dtos.Shared;
+using WebApplication.Dtos.Students;
+using WebApplication.Entities;
+using WebApplication.Filters;
+using WebApplication.Services.Interfaces;
 
-namespace WebApplication3.Controllers
+namespace WebApplication.Controllers
 {
     //[Authorize]
     //[AuthorizationFilter(UserTypes.Admin)]
@@ -95,7 +95,7 @@ namespace WebApplication3.Controllers
             }
         }
 
-        [HttpPatch("update-point")]
+        [HttpPut("update-point")]
         public IActionResult UpdatePoint([FromBody] UpdatePointDto input)
         {
             try
@@ -123,7 +123,7 @@ namespace WebApplication3.Controllers
             }
         }
 
-        [HttpPatch("add-subject")]
+        [HttpPut("add-subject")]
         public IActionResult AddSubjectForStudent(int subjectId,int studentId)
         {
             try

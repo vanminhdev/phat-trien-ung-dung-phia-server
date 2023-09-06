@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace WebApplication3.Entities
+namespace WebApplication.Entities
 {
     public class User
     {

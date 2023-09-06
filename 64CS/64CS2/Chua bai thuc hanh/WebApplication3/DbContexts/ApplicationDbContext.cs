@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApplication3.Constants;
-using WebApplication3.Entities;
+using WebApplication.Constants;
+using WebApplication.Entities;
 
-namespace WebApplication3.DbContexts
+namespace WebApplication.DbContexts
 {
     public class ApplicationDbContext : DbContext
     {

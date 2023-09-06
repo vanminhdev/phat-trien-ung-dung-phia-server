@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebApplication3.Constants;
-using WebApplication3.Utils;
+using WebApplication.Constants;
+using WebApplication.Utils;
 
-namespace WebApplication3.Dtos.Users
+namespace WebApplication.Dtos.Users
 {
     public class CreateUserDto
     {
