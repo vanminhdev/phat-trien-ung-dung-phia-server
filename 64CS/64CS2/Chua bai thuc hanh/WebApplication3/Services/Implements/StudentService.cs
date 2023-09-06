@@ -5,6 +5,7 @@ using WebApplication.Dtos.Students;
 using WebApplication.Entities;
 using WebApplication.Exceptions;
 using WebApplication.Services.Interfaces;
+using WebApplication.Utils;
 
 namespace WebApplication.Services.Implements
 {
@@ -12,11 +13,13 @@ namespace WebApplication.Services.Implements
     {
         private readonly ILogger _logger;
         private readonly ApplicationDbContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public StudentService(ILogger<StudentService> logger, ApplicationDbContext dbContext)
+        public StudentService(ILogger<StudentService> logger, ApplicationDbContext dbContext, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public PageResultDto<List<Student>> GetAll(FilterDto input)
@@ -40,6 +43,7 @@ namespace WebApplication.Services.Implements
 
         public void Create(CreateStudentDto input)
         {
+            int currentUserId = CommonUtils.GetCurrentUserId(_httpContextAccessor);
             if (_dbContext.Students.Any(s => s.StudentCode == input.StudentCode))
             {
                 throw new UserFriendlyException($"Mã sinh viên \"{input.StudentCode}\" đã tồn tại");
