@@ -39,7 +39,7 @@ namespace WebApplication
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
-                    ClockSkew = TimeSpan.Zero // remove delay of token when expire,
+                    ClockSkew = TimeSpan.Zero
                 };
                 options.RequireHttpsMetadata = false;
             });

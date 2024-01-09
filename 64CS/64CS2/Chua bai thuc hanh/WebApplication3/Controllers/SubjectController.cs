@@ -42,6 +42,7 @@ namespace WebApplication.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("create")]
         public IActionResult CreateSubject([FromForm] CreateSubjectDto input)
         {
