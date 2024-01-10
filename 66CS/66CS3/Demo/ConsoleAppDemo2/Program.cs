@@ -12,7 +12,7 @@
             //    Console.WriteLine($"Nhap vao sinh vien thu {i + 1}:");
             //    var student = new Student();
             //    Console.Write("Nhap vao Id:");
-            //    student.Id = Convert.ToInt32(Console.ReadLine());
+            //    student.Id = int.Parse(Console.ReadLine());
 
             //    Console.Write("Nhap vao ten:");
             //    student.Name = Console.ReadLine();
@@ -55,12 +55,12 @@
             var students3 = students.OrderByDescending(s => s.Name);
             foreach(var student in students3)
             {
-                student.Name = "A";
+                //student.Name = "A";
                 Console.WriteLine(student);
             }
 
             //tìm kiếm: có thể null nếu như không thấy
-            Student studentFind = students.FirstOrDefault(s => s.Name == "B"); //trả về tham chiếu
+            Student studentFind = students.FirstOrDefault(s => s.Name == "B" && s.Name.Length >= 1); //trả về tham chiếu
             if (studentFind != null)
             {
                 studentFind.Name = "B1";
@@ -88,11 +88,18 @@
             {
                 1.2, 3.2, 4.1
             };
-            numbers.Max();
-            numbers.Min();
+            Console.WriteLine(numbers.Max());
+            Console.WriteLine(numbers.Min());
 
-            numbers.OrderBy(x => x);
+            var numbers2 = numbers.OrderBy(x => x);
+            foreach (var item in numbers)
+            {
+                Console.WriteLine(item);
+            }
 
+
+            string dateStr = "2024-01-01";
+            DateTime date = DateTime.Parse(dateStr); 
         }
     }
 }
