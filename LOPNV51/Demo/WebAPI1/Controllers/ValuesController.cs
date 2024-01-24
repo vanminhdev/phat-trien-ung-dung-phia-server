@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPI1.Dtos;
+using WebAPI1.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,32 @@ namespace WebAPI1.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private static List<Student> _students = new List<Student>();
+
+        [HttpGet("get-by-id/{id:min(1)}")]
+        public string GetById(int id, string name)
+        {
+            return "";
+        }
+
+        [HttpGet("get-by-name")]
+        public string GetByName(string name)
+        {
+            return "";
+        }
+
+        [HttpGet("find-student-2")]
+        public void FindStudent2(string studentCode, string studentName)
+        {
+            //xử lý tìm kiếm sinh viên
+        }
+
+        [HttpGet("find-student")]
+        public void FindStudent([FromQuery] StudentFilterDto input)
+        {
+            //xử lý tìm kiếm sinh viên
+        }
+
         // GET: api/<ValuesController>
         [HttpGet("abc/def/get1")]
         public IEnumerable<string> Get()
@@ -26,6 +54,12 @@ namespace WebAPI1.Controllers
         public string Get(int id)
         {
             return "value";
+        }
+
+        [HttpPost("add-student")]
+        public void CreateStudent([FromForm] CreateStudentDto input)
+        {
+            //xử lý thêm sinh viên
         }
 
         // POST api/<ValuesController>

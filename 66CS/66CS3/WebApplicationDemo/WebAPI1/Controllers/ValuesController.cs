@@ -21,7 +21,7 @@ namespace WebAPI1.Controllers
         }
 
         [HttpGet("get2")]
-        public IEnumerable<string> Get([FromQuery] string value)
+        public IEnumerable<string> Get([FromQuery] string value, string value2, string value3)
         {
             return new string[] { "value1", "value2" };
         }
