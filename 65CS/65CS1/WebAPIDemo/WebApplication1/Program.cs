@@ -15,7 +15,7 @@ namespace WebApplication1
 
             builder.Services.AddControllers(options =>
             {
-                options.Filters.Add<ExceptionFilter>();
+                //options.Filters.Add<ExceptionFilter>();
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

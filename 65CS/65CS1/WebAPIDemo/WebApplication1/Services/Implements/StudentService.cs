@@ -15,12 +15,14 @@ namespace WebApplication1.Services.Implements
         public void Create(CreateStudentDto input)
         {
             // thêm sinh viên vào list
-            _students.Add(new Student
-            {
-                Id = ++_id,
-                Name = input.Name,
-                Age = input.Age,
-            });
+            _students.Add(
+                new Student
+                {
+                    Id = ++_id,
+                    Name = input.Name,
+                    Age = input.Age,
+                }
+            );
         }
 
         public void Update(UpdateStudentDto input)
@@ -39,12 +41,14 @@ namespace WebApplication1.Services.Implements
             var results = new List<StudentDto>();
             foreach (var student in _students)
             {
-                results.Add(new StudentDto 
-                { 
-                    Id = student.Id,
-                    Name = student.Name,
-                    Age = student.Age
-                });
+                results.Add(
+                    new StudentDto
+                    {
+                        Id = student.Id,
+                        Name = student.Name,
+                        Age = student.Age
+                    }
+                );
             }
             return results;
         }
