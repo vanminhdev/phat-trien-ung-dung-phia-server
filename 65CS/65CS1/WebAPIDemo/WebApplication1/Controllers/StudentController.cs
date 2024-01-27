@@ -12,8 +12,13 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class StudentController : ApiControllerBase
     {
-        private readonly IStudentService _studentService;
+        private readonly IStudentService _studentService; //readonly tức là chỉ được gán một lần trong hàm khởi tạo
 
+        /// <summary>
+        /// Inject
+        /// </summary>
+        /// <param name="studentService"></param>
+        /// <param name="logger"></param>
         public StudentController(IStudentService studentService,
             ILogger<StudentController> logger)
             : base(logger)
@@ -28,13 +33,25 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut("update")]
-        public ActionResult Update(UpdateStudentDto input)
+        public ActionResult Update(UpdateStudentDto input) //Action Result là một class đại diện cho các response trả về cho client
         {
             try
             {
                 _studentService.Update(input);
+                //http status code 200
                 return Ok();
             }
+            //catch (UserFriendlyException ex)
+            //{
+            //    //logic xử lý ngoại lệ
+            //    // trả về http status code là 400
+            //    return BadRequest(ex.Message);
+            //}
+            //catch (Exception ex)
+            //{
+            //    //logic xử lý ngoại lệ
+            //    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            //}
             catch (Exception ex)
             {
                 return HandleException(ex);

@@ -32,6 +32,7 @@ namespace WebApplication1.Services.Implements
             {
                 throw new UserFriendlyException($"Không tìm thấy sinh viên có id = {input.Id}");
             }
+            
             student.Name = input.Name;
             student.Age = input.Age;
         }
