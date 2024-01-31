@@ -21,7 +21,7 @@ namespace WebApplication1.Services.Implements
             var query = from studentClassroom in _context.StudentClassroom
                         join student in _context.Students on studentClassroom.StudentId equals student.Id
                         where studentClassroom.ClassroomId == classroomId
-                        orderby student.Age descending, student.Id descending
+                        orderby student.Age descending, student.Id descending //sắp xếp theo tuổi giảm dần
                         select new StudentDto
                         {
                             Id = student.Id,
