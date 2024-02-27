@@ -10,7 +10,7 @@ namespace WebApplication.Services.Interfaces
         void Create(CreateStudentDto input);
         void Delete(int id);
         void DeleteSubject(int subjectId, int studentId);
-        PageResultDto<List<Student>> GetAll(FilterDto input);
+        PageResultDto<List<StudentDto>> GetAll(FilterDto input);
         Student GetbyId(int id);
         List<StudentSubjectDto> GetListPointOfStudent(int studentId);
         void Update(UpdateStudentDto input);

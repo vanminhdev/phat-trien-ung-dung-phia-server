@@ -11,8 +11,8 @@ using WebApplication1.DbContexts;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230512015259_AddStudentCode")]
-    partial class AddStudentCode
+    [Migration("20240223040514_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Dtos.Shared
 {
@@ -7,8 +7,10 @@ namespace WebApplication.Dtos.Shared
     {
         [FromQuery(Name = "pageSize")]
         public int PageSize { get; set; }
+
         [FromQuery(Name = "pageIndex")]
         public int PageIndex { get; set; }
+
         private string _keyword;
         [FromQuery(Name = "keyword")]
         public string Keyword

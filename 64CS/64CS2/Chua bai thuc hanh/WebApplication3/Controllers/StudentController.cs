@@ -10,8 +10,8 @@ using WebApplication.Services.Interfaces;
 
 namespace WebApplication.Controllers
 {
-    //[Authorize]
-    //[AuthorizationFilter(UserTypes.Admin)]
+    [Authorize]
+    [AuthorizationFilter(UserTypes.Admin)]
     [Route("api/student")]
     [ApiController]
     public class StudentController : ApiControllerBase

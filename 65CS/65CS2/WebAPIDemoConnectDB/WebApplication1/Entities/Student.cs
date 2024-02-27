@@ -12,7 +12,7 @@ namespace WebApplication1.Entities
         public int Id { get; set; }
 
         [Required] //tương ứng là not null
-        [MaxLength(100)]
+        [MaxLength(200)]
         //[Unicode]
         //tương ứng là nvarchar(100)
         public string Name { get; set; }

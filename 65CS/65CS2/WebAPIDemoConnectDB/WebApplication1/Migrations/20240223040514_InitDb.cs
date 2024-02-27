@@ -5,7 +5,7 @@
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class InitCreateTable : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,8 @@ namespace WebApplication1.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: false)
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    StudentCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {

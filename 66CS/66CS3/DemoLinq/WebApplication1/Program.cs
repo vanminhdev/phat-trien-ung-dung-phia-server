@@ -24,7 +24,7 @@ namespace WebApplication1
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton(new ApplicationDbContext());
             builder.Services.AddScoped<IStudentService, StudentService>();
-            builder.Services.AddScoped<IClassroomService, ClassroomService>();
+            builder.Services.AddTransient<IClassroomService, ClassroomService>();
 
             var app = builder.Build();
 

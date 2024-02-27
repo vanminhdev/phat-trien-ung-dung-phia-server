@@ -22,10 +22,16 @@ namespace WebApplication.Services.Implements
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public PageResultDto<List<Student>> GetAll(FilterDto input)
+        public PageResultDto<List<StudentDto>> GetAll(FilterDto input)
         {
-            var studentQuery = _dbContext.Students.AsQueryable();
-            if (input.Keyword != null)
+            var studentQuery = _dbContext.Students.Select(s => new StudentDto
+            {
+                Id = s.Id,
+                Name = s.Name,
+                DateOfBirth = s.DateOfBirth,
+                StudentCode = s.StudentCode
+            });
+            if (!string.IsNullOrEmpty(input.Keyword))
             {
                 studentQuery = studentQuery.Where(s => s.Name.ToLower().Contains(input.Keyword));
                 //or s.Name?.Contains(input.Keyword) ?? false
@@ -34,7 +40,7 @@ namespace WebApplication.Services.Implements
             studentQuery = studentQuery.Skip(input.PageSize * (input.PageIndex - 1))
                 .Take(input.PageSize);
 
-            return new PageResultDto<List<Student>>
+            return new PageResultDto<List<StudentDto>>
             {
                 Items = studentQuery.ToList(),
                 TotalItem = totalItem,
