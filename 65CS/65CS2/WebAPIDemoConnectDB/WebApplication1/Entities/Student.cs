@@ -14,7 +14,7 @@ namespace WebApplication1.Entities
         [Required] //tương ứng là not null
         [MaxLength(200)]
         //[Unicode]
-        //tương ứng là nvarchar(100)
+        //tương ứng là nvarchar(200)
         public string Name { get; set; }
 
         //[Required] //không cần viết required do kiểu int không chứa null, chỉ viết required khi kiểu dữ liệu có thể chứa null

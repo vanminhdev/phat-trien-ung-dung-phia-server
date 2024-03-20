@@ -1,4 +1,5 @@
-﻿using WebApplication1.DbContexts;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApplication1.DbContexts;
 using WebApplication1.Dto.Student;
 using WebApplication1.Entities;
 using WebApplication1.Exceptions;
@@ -42,17 +43,12 @@ namespace WebApplication1.Services.Implements
 
         public List<StudentDto> GetAll()
         {
-            var results = new List<StudentDto>();
-            foreach (var student in _context.Students)
+            return _context.Students.Select(s => new StudentDto
             {
-                results.Add(new StudentDto 
-                { 
-                    Id = student.Id,
-                    Name = student.Name,
-                    Age = student.Age
-                });
-            }
-            return results;
+                Id = s.Id,
+                Name = s.Name,
+                Age = s.Age
+            }).ToList();
         }
     }
 }
