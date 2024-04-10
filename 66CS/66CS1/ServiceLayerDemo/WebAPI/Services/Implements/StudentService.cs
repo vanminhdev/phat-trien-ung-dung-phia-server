@@ -8,8 +8,6 @@ namespace WebAPI.Services.Implements
 {
     public class StudentService : IStudentService
     {
-        private static List<Student> _students = new List<Student>();
-        private static int _id = 0;
         private readonly ApplicationDbContext _dbContext;
 
         public StudentService(ApplicationDbContext dbContext)
@@ -21,18 +19,18 @@ namespace WebAPI.Services.Implements
         {
             var student = new Student
             {
-                Id = ++_id,
+                Id = ++_dbContext.Id,
                 Name = input.Name,
                 DateOfBirth = input.DateOfBirth,
             };
 
-            _students.Add(student);
+            _dbContext.Students.Add(student);
             return student;
         }
 
         public void UpdateStudent(UpdateStudentDto student)
         {
-            var findStudent = _students.FirstOrDefault(s => s.Id == student.Id);
+            var findStudent = _dbContext.Students.FirstOrDefault(s => s.Id == student.Id);
             if (findStudent == null)
             {
                 //báo lỗi

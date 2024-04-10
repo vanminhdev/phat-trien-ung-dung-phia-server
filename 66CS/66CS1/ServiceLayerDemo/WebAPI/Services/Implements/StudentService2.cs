@@ -11,7 +11,7 @@ namespace WebAPI.Services.Implements
             throw new NotImplementedException();
         }
 
-        public void UpdateStudent(Student student)
+        public void UpdateStudent(UpdateStudentDto student)
         {
             throw new NotImplementedException();
         }

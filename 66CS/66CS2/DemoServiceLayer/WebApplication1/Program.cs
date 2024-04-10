@@ -1,9 +1,9 @@
 
-using WebAPI.DbContexts;
-using WebAPI.Services.Abstract;
-using WebAPI.Services.Implements;
+using WebApplication1.DbContexts;
+using WebApplication1.Services.Abstract;
+using WebApplication1.Services.Implements;
 
-namespace WebAPI
+namespace WebApplication1
 {
     public class Program
     {
@@ -18,7 +18,7 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentService, StudentService>();
-            builder.Services.AddSingleton<ApplicationDbContext>();
+            builder.Services.AddTransient<ApplicationDbContext>();
 
             var app = builder.Build();
 

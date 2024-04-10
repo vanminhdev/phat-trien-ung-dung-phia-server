@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DbContexts;
 using WebApplication1.Dto;
 using WebApplication1.Entity;
+using WebApplication1.Services.Abstract;
+using WebApplication1.Services.Implements;
 
 namespace WebApplication1.Controllers
 {
@@ -11,9 +14,13 @@ namespace WebApplication1.Controllers
     {
         private static List<Student> _students = new List<Student>();
         private static int _id = 0;
+        private readonly IStudentService _studentService;
+        private readonly ApplicationDbContext _dbContext;
 
-        public StudentController()
+        public StudentController(IStudentService studentService, ApplicationDbContext dbContext)
         {
+            _studentService = studentService;
+            _dbContext = dbContext;
         }
 
         [HttpPost("create")]
@@ -72,16 +79,18 @@ namespace WebApplication1.Controllers
         [HttpPut("update")]
         public IActionResult UpdateStudent(UpdateStudentDto input)
         {
-            var studentFind = _students.Find(s => s.Id == input.Id && !s.IsDeleted);
-            if (studentFind == null)
+            try
             {
-                return BadRequest(new ApiResponse { Message = $"Không tìm thấy sinh viên có id {input.Id}" });
+                _studentService.UpdateStudent(input);
+                return Ok();
             }
-
-            studentFind.StudentCode = input.StudentCode;
-            studentFind.Name = input.Name;
-            studentFind.DateOfBirth = input.DateOfBirth;
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse
+                {
+                    Message = ex.Message
+                });
+            }
         }
 
         [HttpDelete("delete/{id}")]
