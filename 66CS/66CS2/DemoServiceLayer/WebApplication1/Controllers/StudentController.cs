@@ -12,7 +12,9 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
+        [Obsolete("bỏ danh sách này đi")]
         private static List<Student> _students = new List<Student>();
+        [Obsolete("bỏ id này đi")]
         private static int _id = 0;
         private readonly IStudentService _studentService;
         private readonly ApplicationDbContext _dbContext;
@@ -30,17 +32,18 @@ namespace WebApplication1.Controllers
             //{
             //    return BadRequest("Tên không hợp lệ"); //http status 400
             //}
-            var student = new Student
-            {
-                Id = ++_id,
-                Name = input.Name,
-                StudentCode = input.StudentCode,
-                DateOfBirth = input.DateOfBirth,
-                IsDeleted = false
-            };
+            //var student = new Student
+            //{
+            //    Id = ++_id,
+            //    Name = input.Name,
+            //    StudentCode = input.StudentCode,
+            //    DateOfBirth = input.DateOfBirth,
+            //    IsDeleted = false
+            //};
 
-            _students.Add(student);
+            //_students.Add(student);
             //các hàm đều trả về các đối tượng implement interface IActionResult
+            var student = _studentService.CreateStudent(input);
             return Ok(student); //http status code 200
         }
 
@@ -48,14 +51,14 @@ namespace WebApplication1.Controllers
         public IActionResult GetStudents()
         {
             //sử dụng hàm select (linq)
-            var result = _students.Where(s => !s.IsDeleted).Select(s => new StudentDto
-            {
-                Id = s.Id,
-                Name = s.Name,
-                StudentCode = s.StudentCode,
-                DateOfBirth = s.DateOfBirth,
-            });
-            return Ok(result);
+            //var result = _students.Where(s => !s.IsDeleted).Select(s => new StudentDto
+            //{
+            //    Id = s.Id,
+            //    Name = s.Name,
+            //    StudentCode = s.StudentCode,
+            //    DateOfBirth = s.DateOfBirth,
+            //});
+            return Ok(_studentService.GetAll());
         }
 
         [HttpGet("get-by-id/{id}")]

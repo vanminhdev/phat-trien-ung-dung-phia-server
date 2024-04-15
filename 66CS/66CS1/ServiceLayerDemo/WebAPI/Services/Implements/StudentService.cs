@@ -19,7 +19,7 @@ namespace WebAPI.Services.Implements
         {
             var student = new Student
             {
-                Id = ++_dbContext.Id,
+                Id = ++_dbContext.StudentId,
                 Name = input.Name,
                 DateOfBirth = input.DateOfBirth,
             };

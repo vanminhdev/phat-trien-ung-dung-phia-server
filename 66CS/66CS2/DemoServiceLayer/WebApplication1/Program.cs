@@ -18,7 +18,7 @@ namespace WebApplication1
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentService, StudentService>();
-            builder.Services.AddTransient<ApplicationDbContext>();
+            builder.Services.AddSingleton<ApplicationDbContext>();
 
             var app = builder.Build();
 

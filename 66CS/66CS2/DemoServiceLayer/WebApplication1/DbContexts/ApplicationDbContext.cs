@@ -7,6 +7,9 @@ namespace WebApplication1.DbContexts
     /// </summary>
     public class ApplicationDbContext
     {
+        public List<Student> Students { get; set; } = new List<Student>();
+        public int Id { get; set; } = 0;
+
         public ApplicationDbContext()
         {
         }
