@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Dto
+﻿namespace WebApplication1.Dto.Students
 {
     public class StudentDto
     {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DbContexts;
 using WebApplication1.Dto;
+using WebApplication1.Dto.Students;
 using WebApplication1.Entity;
 using WebApplication1.Services.Abstract;
 using WebApplication1.Services.Implements;

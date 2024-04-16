@@ -1,24 +1,22 @@
 ﻿using WebApplication1.DbContexts;
-using WebApplication1.Dto;
+using WebApplication1.Dto.Students;
 using WebApplication1.Entity;
 using WebApplication1.Exceptions;
 using WebApplication1.Services.Abstract;
 
 namespace WebApplication1.Services.Implements
 {
-    public class StudentService : IStudentService
+    public class StudentService : ClassroomBaseService, IStudentService
     {
-        private readonly ApplicationDbContext _dbContext;
-        public StudentService(ApplicationDbContext dbContext)
+        public StudentService(ApplicationDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
         public StudentDto CreateStudent(CreateStudentDto input)
         {
             var student = new Student
             {
-                Id = ++_dbContext.Id,
+                Id = ++_dbContext.StudentId,
                 Name = input.Name,
                 DateOfBirth = input.DateOfBirth,
                 StudentCode = input.StudentCode,
@@ -48,18 +46,10 @@ namespace WebApplication1.Services.Implements
 
         public void UpdateStudent(UpdateStudentDto input)
         {
-            var studentFind = _dbContext.Students.Find(s => s.Id == input.Id && !s.IsDeleted);
-            if (studentFind == null)
-            {
-                throw new UserFriendlyException($"Không tìm thấy sinh viên có id {input.Id}");
-            }
-
+            var studentFind = FindStudentById(input.Id);
             studentFind.StudentCode = input.StudentCode;
             studentFind.Name = input.Name;
             studentFind.DateOfBirth = input.DateOfBirth;
-
         }
-
-
     }
 }

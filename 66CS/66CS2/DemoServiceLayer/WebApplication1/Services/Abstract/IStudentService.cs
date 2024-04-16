@@ -1,4 +1,4 @@
-﻿using WebApplication1.Dto;
+﻿using WebApplication1.Dto.Students;
 
 namespace WebApplication1.Services.Abstract
 {

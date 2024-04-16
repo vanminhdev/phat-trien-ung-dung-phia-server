@@ -1,4 +1,4 @@
-
+﻿
 using WebApplication1.DbContexts;
 using WebApplication1.Services.Abstract;
 using WebApplication1.Services.Implements;
@@ -18,7 +18,9 @@ namespace WebApplication1
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentService, StudentService>();
-            builder.Services.AddSingleton<ApplicationDbContext>();
+            builder.Services.AddScoped<IClassroomService, ClassroomService>();
+            builder.Services.AddScoped<IStudentClassroomService, ClassroomService>();
+            builder.Services.AddSingleton<ApplicationDbContext>(); //dùng singleton vì muốn dùng chung một object
 
             var app = builder.Build();
 
