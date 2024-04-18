@@ -19,8 +19,8 @@ namespace WebAPI.Services.Abstract
         /// <summary>
         /// Lấy danh sách sinh viên trong một lớp
         /// </summary>
-        /// <param name="clasroomId"></param>
+        /// <param name="classroomId"></param>
         /// <returns></returns>
-        List<StudentDto> GetAllStudent(int clasroomId);
+        List<StudentDto> GetAllStudent(int classroomId);
     }
 }

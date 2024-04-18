@@ -1,4 +1,5 @@
-﻿using WebAPI.DbContexts;
+﻿using System.Linq;
+using WebAPI.DbContexts;
 using WebAPI.Dtos.Classrooms;
 using WebAPI.Dtos.Students;
 using WebAPI.Entities;
@@ -30,7 +31,7 @@ namespace WebAPI.Services.Implements
             }
         }
 
-        public List<StudentDto> GetAllStudent(int clasroomId)
+        public List<StudentDto> GetAllStudent(int classroomId)
         {
             //cách 1: linq syntax
             var result =
@@ -38,7 +39,7 @@ namespace WebAPI.Services.Implements
                 join student in _dbContext.Students on studentClass.StudentId equals student.Id
                 join classroom in _dbContext.Classrooms
                     on studentClass.ClassroomId equals classroom.Id
-                where studentClass.ClassroomId == clasroomId
+                where studentClass.ClassroomId == classroomId
                 select new StudentDto
                 {
                     Id = student.Id,
@@ -55,16 +56,20 @@ namespace WebAPI.Services.Implements
                     s => s.Id,
                     (studentClassroom, student) => new { studentClassroom, student }
                 )
+                .Where(o => o.studentClassroom.ClassroomId == classroomId)
                 .Join(
                     _dbContext.Classrooms,
                     sc => sc.studentClassroom.ClassroomId,
                     c => c.Id,
-                    (sc, c) => new StudentDto {
+                    (sc, c) => new StudentDto
+                    {
                         Id = sc.studentClassroom.Id,
                         Name = sc.student.Name,
                         DateOfBirth = sc.student.DateOfBirth,
+
                     }
                 );
+                
 
             //cách 3: sử dụng các navigation property và viết các hàm include (sẽ giới thiệu trong ef core)
 
