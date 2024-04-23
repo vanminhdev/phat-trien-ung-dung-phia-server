@@ -10,7 +10,8 @@ connection.on("ReceiveMessage", (user, message) => {
     console.log({user, message});
 });
 
-connection.start()
+connection
+    .start()
     .catch(error => {
         console.error('Error connecting to SignalR hub:', error);
     });

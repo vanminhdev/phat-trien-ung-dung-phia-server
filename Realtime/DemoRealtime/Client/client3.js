@@ -14,6 +14,11 @@ socket.on('message', (message) => {
     console.log(message)
 });
 
+// Xử lý sự kiện khi mất kết nối với máy chủ
+socket.on('disconnect', () => {
+    console.log('Disconnected from server');
+});
+
 setInterval(() => {
     socket.emit("send-message", "hello")
 }, 3000);
