@@ -18,7 +18,7 @@ namespace WebApplication1.Services.Implements
         //hàm tìm kiếm sinh viên theo id
         protected Student FindStudentById(int studentId)
         {
-            var studentFind = _dbContext.Students.Find(s => s.Id == studentId && !s.IsDeleted);
+            var studentFind = _dbContext.Students.FirstOrDefault(s => s.Id == studentId && !s.IsDeleted);
             if (studentFind == null)
             {
                 throw new UserFriendlyException($"Không tìm thấy sinh viên có id {studentId}");

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using WebAPI.DbContexts;
 using WebAPI.Services.Abstract;
 using WebAPI.Services.Implements;
@@ -17,7 +18,10 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentService, StudentService>();
-            builder.Services.AddSingleton<ApplicationDbContext>();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+            });
 
             var app = builder.Build();
 

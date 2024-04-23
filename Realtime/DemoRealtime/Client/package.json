@@ -1,0 +1,16 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client1.js",
+  "scripts": {
+    "client1": "node --experimental-modules client1.js",
+    "client2": "node --experimental-modules client2.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@microsoft/signalr": "^8.0.0"
+  },
+  "type": "module"
+}

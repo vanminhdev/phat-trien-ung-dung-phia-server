@@ -16,7 +16,7 @@ namespace WebApplication1.Services.Implements
         {
             var student = new Student
             {
-                Id = ++_dbContext.StudentId,
+                //Id = ++_dbContext.StudentId,
                 Name = input.Name,
                 DateOfBirth = input.DateOfBirth,
                 StudentCode = input.StudentCode,

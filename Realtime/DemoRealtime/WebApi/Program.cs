@@ -1,10 +1,7 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.DbContexts;
-using WebApplication1.Services.Abstract;
-using WebApplication1.Services.Implements;
+using WebApi.Hubs;
 
-namespace WebApplication1
+namespace WebApi
 {
     public class Program
     {
@@ -18,18 +15,12 @@ namespace WebApplication1
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<IStudentService, StudentService>();
-            builder.Services.AddScoped<IClassroomService, ClassroomService>();
-            builder.Services.AddScoped<IStudentClassroomService, ClassroomService>();
-            //builder.Services.AddSingleton<ApplicationDbContext>(); //dùng singleton vì muốn dùng chung một object
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
-            });
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
+            //thứ tự khai báo middleware: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -37,10 +28,11 @@ namespace WebApplication1
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-
             app.MapControllers();
+            app.MapHub<ChatHub>("/chat");
 
             app.Run();
         }
