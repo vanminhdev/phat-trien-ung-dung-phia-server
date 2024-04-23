@@ -5,12 +5,15 @@
   "main": "client1.js",
   "scripts": {
     "client1": "node --experimental-modules client1.js",
-    "client2": "node --experimental-modules client2.js"
+    "client2": "node --experimental-modules client2.js",
+    "client3": "node --experimental-modules client3.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@microsoft/signalr": "^8.0.0"
+    "@microsoft/signalr": "^8.0.0",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5"
   },
   "type": "module"
 }

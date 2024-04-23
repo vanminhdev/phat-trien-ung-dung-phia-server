@@ -51,7 +51,7 @@ namespace WebApplication1.Services.Implements
                 _dbContext.StudentClasses.Add(
                     new StudentClassroom
                     {
-                        Id = ++_dbContext.StudentClassroomId,
+                        //Id = ++_dbContext.StudentClassroomId,
                         StudentId = studentId,
                         ClassroomId = input.ClassroomId,
                     }

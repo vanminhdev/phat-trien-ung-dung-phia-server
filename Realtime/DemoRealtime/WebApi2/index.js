@@ -11,9 +11,8 @@ io.on('connection', (socket) => {
     console.log('A client connected');
 
     // Xử lý khi máy khách gửi tin nhắn mới
-    socket.on('message', (message) => {
-        console.log('Received message:', message);
-        // Gửi tin nhắn cho tất cả các máy khách kết nối
+    socket.on('send-message', (message) => {
+        console.log('Received message', message)
         io.emit('message', message);
     });
 
