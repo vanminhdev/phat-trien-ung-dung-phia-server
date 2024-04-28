@@ -12,7 +12,7 @@ namespace WebAPI.Entities
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(101)]
         [Unicode]
         public string Name { get; set; }
 

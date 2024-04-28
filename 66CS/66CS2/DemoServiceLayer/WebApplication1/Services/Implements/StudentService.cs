@@ -23,6 +23,7 @@ namespace WebApplication1.Services.Implements
                 //IsDeleted = false,
             };
             _dbContext.Students.Add(student);
+            _dbContext.SaveChanges();
             return new StudentDto
             {
                 Id = student.Id,
@@ -50,6 +51,15 @@ namespace WebApplication1.Services.Implements
             studentFind.StudentCode = input.StudentCode;
             studentFind.Name = input.Name;
             studentFind.DateOfBirth = input.DateOfBirth;
+
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteStudent(int id)
+        {
+            var studentFind = FindStudentById(id);
+            _dbContext.Students.Remove(studentFind);
+            _dbContext.SaveChanges();
         }
     }
 }

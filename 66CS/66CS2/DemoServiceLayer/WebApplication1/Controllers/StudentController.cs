@@ -100,13 +100,15 @@ namespace WebApplication1.Controllers
         [HttpDelete("delete/{id}")]
         public IActionResult DeleteStudent(int id)
         {
-            var studentFind = _students.Find(s => s.Id == id && !s.IsDeleted);
-            if (studentFind == null)
-            {
-                return BadRequest(new ApiResponse { Message = $"Không tìm thấy sinh viên có id {id}" });
-            }
-            studentFind.IsDeleted = true;
-            //_students.Remove(studentFind);
+            //var studentFind = _students.Find(s => s.Id == id && !s.IsDeleted);
+            //if (studentFind == null)
+            //{
+            //    return BadRequest(new ApiResponse { Message = $"Không tìm thấy sinh viên có id {id}" });
+            //}
+            //studentFind.IsDeleted = true;
+            ////_students.Remove(studentFind);
+            ///
+            _studentService.DeleteStudent(id);
             return Ok();
         }
     }

@@ -9,5 +9,7 @@ namespace WebApplication1.Services.Abstract
         void UpdateStudent(UpdateStudentDto input);
 
         List<StudentDto> GetAll();
+
+        void DeleteStudent(int id);
     }
 }

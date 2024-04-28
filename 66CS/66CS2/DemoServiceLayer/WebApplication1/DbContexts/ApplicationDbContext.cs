@@ -29,7 +29,13 @@ namespace WebApplication1.DbContexts
                     .HasColumnName("Id") //Option
                     .ValueGeneratedOnAdd() //identity(1,1)
                     .IsRequired(); //required field
-                entity.Property(e => e.Name).HasColumnType("nvarchar(50)").IsRequired();
+
+                entity.Property(e => e.StudentCode)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(e => e.Name).HasMaxLength(100).IsUnicode(true).IsRequired(); //cách 1
+                //entity.Property(e => e.Name).HasColumnType("nvarchar(50)").IsRequired(); //cách 2
             });
 
             //cách 2 cấu hình trong entity
@@ -50,6 +56,12 @@ namespace WebApplication1.DbContexts
             //    .HasForeignKey(sc => sc.StudentId);
 
             //navigation property ?
+
+            modelBuilder
+                .Entity<StudentClassroom>() //”Class many”
+                .HasOne<Classroom>() //”class one”
+                .WithMany()
+                .HasForeignKey(sc => sc.ClassroomId);
         }
     }
 }

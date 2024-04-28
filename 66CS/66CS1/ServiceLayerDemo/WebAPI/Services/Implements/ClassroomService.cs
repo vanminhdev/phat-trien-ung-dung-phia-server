@@ -23,7 +23,7 @@ namespace WebAPI.Services.Implements
                 _dbContext.StudentClasses.Add(
                     new StudentClassroom
                     {
-                        Id = ++_dbContext.StudentClassroomId,
+                        //Id = ++_dbContext.StudentClassroomId,
                         ClassroomId = input.ClassroomId,
                         StudentId = studentId,
                     }

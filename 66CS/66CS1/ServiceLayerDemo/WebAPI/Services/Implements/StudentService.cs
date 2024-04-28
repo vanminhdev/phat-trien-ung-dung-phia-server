@@ -19,12 +19,13 @@ namespace WebAPI.Services.Implements
         {
             var student = new Student
             {
-                Id = ++_dbContext.StudentId,
+                //Id = ++_dbContext.StudentId,
                 Name = input.Name,
                 DateOfBirth = input.DateOfBirth,
             };
 
             _dbContext.Students.Add(student);
+            _dbContext.SaveChanges();
             return student;
         }
 
@@ -41,9 +42,22 @@ namespace WebAPI.Services.Implements
                 findStudent.Name = student.Name;
                 findStudent.DateOfBirth = student.DateOfBirth;
             }
+            _dbContext.SaveChanges();
 
             //có thêm ngoại lệ
             // throw new Ex
+        }
+
+        public void DeleteStudent(int id)
+        {
+            var findStudent = _dbContext.Students.FirstOrDefault(s => s.Id == id);
+            if (findStudent == null)
+            {
+                //báo lỗi
+                throw new UserFriendlyException($"Không tìm thấy sinh viên có id là {id}");
+            }
+            _dbContext.Students.Remove(findStudent);
+            _dbContext.SaveChanges();
         }
     }
 }

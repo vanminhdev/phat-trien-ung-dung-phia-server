@@ -26,6 +26,8 @@ namespace WebAPI.DbContexts
             //    entity.Property(e => e.Name).HasColumnType("nvarchar(50)").IsRequired();
             //});
 
+            //cấu hình quan hệ 1 n
+
             //cách 1:
             modelBuilder.Entity<StudentClassroom>()
                 .HasOne<Student>()
@@ -33,10 +35,15 @@ namespace WebAPI.DbContexts
                 .HasForeignKey(sc => sc.StudentId);
 
             //cách 2:
-            modelBuilder.Entity<Student>()
-                .HasMany<StudentClassroom>()
-                .WithOne()
-                .HasForeignKey(sc => sc.StudentId);
+            //modelBuilder.Entity<Student>()
+            //    .HasMany<StudentClassroom>()
+            //    .WithOne()
+            //    .HasForeignKey(sc => sc.StudentId);
+
+            modelBuilder.Entity<StudentClassroom>()
+                .HasOne<Classroom>()
+                .WithMany()
+                .HasForeignKey(sc => sc.ClassroomId);
         }
     }
 }
