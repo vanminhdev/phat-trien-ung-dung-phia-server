@@ -1,4 +1,5 @@
-﻿using WebApplication1.Dto.Students;
+﻿using WebApplication1.Dto.Common;
+using WebApplication1.Dto.Students;
 
 namespace WebApplication1.Services.Abstract
 {
@@ -11,5 +12,6 @@ namespace WebApplication1.Services.Abstract
         List<StudentDto> GetAll();
 
         void DeleteStudent(int id);
+        PageResultDto<StudentDto> GetAll(FilterDto input);
     }
 }

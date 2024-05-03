@@ -1,4 +1,5 @@
 ﻿using WebApplication1.DbContexts;
+using WebApplication1.Dto.Common;
 using WebApplication1.Dto.Students;
 using WebApplication1.Entity;
 using WebApplication1.Exceptions;
@@ -8,9 +9,8 @@ namespace WebApplication1.Services.Implements
 {
     public class StudentService : ClassroomBaseService, IStudentService
     {
-        public StudentService(ApplicationDbContext dbContext) : base(dbContext)
-        {
-        }
+        public StudentService(ApplicationDbContext dbContext)
+            : base(dbContext) { }
 
         public StudentDto CreateStudent(CreateStudentDto input)
         {
@@ -41,7 +41,38 @@ namespace WebApplication1.Services.Implements
                 Name = s.Name,
                 StudentCode = s.StudentCode,
                 DateOfBirth = s.DateOfBirth
-            }).ToList();
+            });
+            //foreach (var item in result)
+            //{
+            //}
+            //var results2 = result.ToList();
+            return result.ToList();
+        }
+
+        public PageResultDto<StudentDto> GetAll(FilterDto input)
+        {
+            var result = new PageResultDto<StudentDto>();
+            var query = _dbContext.Students.Where(e =>
+                input.Keyword == null
+                || e.Name.ToLower().Contains(input.Keyword.ToLower())
+            );
+
+            result.TotalItem = query.Count();
+            query = query
+                .OrderByDescending(s => s.DateOfBirth) //sắp xếp theo ngày sinh giảm dần và id giảm dần
+                .ThenByDescending(s => s.Id)
+                .Skip(input.Skip())
+                .Take(input.PageSize);
+
+            result.Items = query
+                .Select(s => new StudentDto
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    StudentCode = s.StudentCode,
+                    DateOfBirth = s.DateOfBirth
+                })
+                .ToList();
             return result;
         }
 

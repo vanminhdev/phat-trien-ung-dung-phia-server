@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DbContexts;
 using WebApplication1.Dto;
+using WebApplication1.Dto.Common;
 using WebApplication1.Dto.Students;
 using WebApplication1.Entity;
 using WebApplication1.Services.Abstract;
@@ -48,7 +49,7 @@ namespace WebApplication1.Controllers
             return Ok(student); //http status code 200
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("get-all-list")]
         public IActionResult GetStudents()
         {
             //sử dụng hàm select (linq)
@@ -60,6 +61,27 @@ namespace WebApplication1.Controllers
             //    DateOfBirth = s.DateOfBirth,
             //});
             return Ok(_studentService.GetAll());
+        }
+
+        /// <summary>
+        /// Lấy danh sách chia trang
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet("get-all")]
+        public IActionResult GetStudents2([FromQuery] FilterDto input)
+        {
+            try
+            {
+                return Ok(_studentService.GetAll(input));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse
+                {
+                    Message = ex.Message
+                });
+            }
         }
 
         [HttpGet("get-by-id/{id}")]
